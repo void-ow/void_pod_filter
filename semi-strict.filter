@@ -1,0 +1,456 @@
+// Void's LF
+
+// ## Miscellaneous ##
+
+// # Hide random unneeded stuff #
+// Gold - pretty much irrelevant anyway, you'd want to pick up items and sell them for 35k
+ItemDisplay[GOLD<10000]:
+// Key - while it is funny to get a key in a locked chest, it's pointless to show them
+ItemDisplay[key]:
+// Stamina potion
+ItemDisplay[vps]:
+// Antidote potion
+ItemDisplay[yps]:
+// Thawing potion
+ItemDisplay[wms]:
+// Town portal book
+ItemDisplay[tbk]:
+// Identify book
+ItemDisplay[ibk]:
+// Rusted Arrows
+ItemDisplay[aqv]:
+// Rusted Bolts:
+ItemDisplay[cqv]:
+// Throwing Potions
+ItemDisplay[gpm OR opm OR opl OR ops OR gps OR gpl]:
+
+// # Conditional Hiding # - Hidden on level
+// Magic Arrows and Bolts
+ItemDisplay[MAG (aq2 OR cq2) CLVL>29]:
+// Town Portal Scroll
+ItemDisplay[tsc CLVL<20]:%TAN%Scroll of Town Portal%WHITE%
+ItemDisplay[tsc]:
+// Identify Scroll
+ItemDisplay[isc CLVL<15]:%TAN%Scroll of Identification%WHITE%
+ItemDisplay[isc]:
+// Chipped Gems - Not needed for rune upgrades anymore, might be good to plop them while levelling
+ItemDisplay[(gcv OR gcy OR gcb OR gcg OR gcr OR gcw OR skc) CLVL<20]:%TAN%Chipped Gem%WHITE%
+ItemDisplay[gcv OR gcy OR gcb OR gcg OR gcr OR gcw OR skc]:
+// Flawed Gems - Not needed for rune upgrades anymore, might be good to plop them while levelling
+ItemDisplay[(gfv OR gfy OR gfb OR gfg OR gfr OR gfw OR skf) CLVL<30]:%TAN%Flawed Gem%WHITE%
+ItemDisplay[gfv OR gfy OR gfb OR gfg OR gfr OR gfw OR skf]:
+// Normal Gems - Not needed for rune upgrades anymore, might be good to plop them while levelling
+ItemDisplay[(gsv OR gsy OR gsb OR gsg OR gsr OR gsw OR sku) CLVL<40]:%TAN%Normal Gem%WHITE%
+ItemDisplay[gsv OR gsy OR gsb OR gsg OR gsr OR gsw OR sku]:
+// Lesser Healing Potion
+ItemDisplay[hp1 CLVL<15]:%RED%hp%WHITE%
+ItemDisplay[hp1]: 
+// Light Healing Potion
+ItemDisplay[hp2 CLVL<25]:%RED%hp%WHITE%
+ItemDisplay[hp2]:
+// Healing Potion
+ItemDisplay[hp3 CLVL<35]:%RED%hp%WHITE%
+ItemDisplay[hp3]:
+// Greater Healing Potion
+ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
+ItemDisplay[hp4]:
+// Lesser Mana Potion
+ItemDisplay[mp1 CLVL<20]:%BLUE%mp%WHITE%
+ItemDisplay[mp1]:
+// Light Mana Potion
+ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%mp%WHITE%
+ItemDisplay[mp2]:
+// Mana Potion
+ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%mp%WHITE%
+ItemDisplay[mp3]:
+// Greater Mana Potion
+ItemDisplay[mp4 DIFFICULTY<2]:%BLUE%mp%WHITE%
+ItemDisplay[mp4]:
+// Small rejuvenation potion
+ItemDisplay[rvs CLVL<50]:%PURPLE%rp%WHITE%
+ItemDisplay[rvs]:
+
+// # Rename usable consumables # - Color coded as a potion color
+// Full rejuvenation potion
+ItemDisplay[rvl]:%PURPLE%RP%WHITE%
+// Super Healing Potion
+ItemDisplay[hp5]:%RED%HP%WHITE%
+// Super Mana Potion
+ItemDisplay[mp5]:%BLUE%MP%WHITE%
+
+// # Show throwing items as free money #
+// Flying Knife, Flying Axe and Winged Knife
+ItemDisplay[(7tk OR 7bk OR 7ta) (MAG OR RARE OR NMAG) (!ETH AND !INF)]: %TAN%Gold%WHITE%
+
+// ## Socketables ##
+// # Gems #
+// Flawless Gems - Gems are not created equal, some are needed in crafting and some are not. Additionally, some of them are skulls
+// Crafting Gems - Ruby, Amethyst, Sapphire, Emerald
+ItemDisplay[gzv OR glb OR glg OR glr OR skl]:%ORANGE%G+%WHITE%
+// Remaining Gems
+ItemDisplay[gly OR glw]:%ORANGE%G%WHITE%
+// Perfect Gems - no need for special distinction, you either pick up all of them or none of them. Maybe for a skull?
+ItemDisplay[gpv OR gpy OR gpb OR gpg OR gpr OR gpw OR skz]:%ORANGE%Gem%WHITE%
+// # Runes #
+// Crafting Runes 4-12 without 6
+ItemDisplay[r04 OR r05 OR r06 OR r07 OR r08 OR r09 OR r10 OR r11 OR r12]:%ORANGE%%RUNENAME%%GRAY% <%ORANGE%c%GRAY%>%WHITE%%CONTINUE%
+// Default Runes
+ItemDisplay[r01 OR r02 OR r03 OR r04 OR r05 OR r06 OR r07 OR r08 OR r09 OR r10 OR r11 OR r12 OR r13 OR r14 OR r15 OR r16 OR r17 OR r18 OR r19 OR r20 OR r21 OR r22 OR r23 OR r24 OR r25 OR r26 OR r27 OR r28 OR r29 OR r30 OR r31 OR r32 OR r33]:%ORANGE%%NAME% %WHITE%[%ORANGE%%RUNENUM%%WHITE%]
+// # Jewels #
+ItemDisplay[!ID MAG jew]:%ORANGE%J%WHITE%
+ItemDisplay[!ID RARE jew]:%ORANGE%Jewel%WHITE%
+
+// ## Class-specific Identifiable Items ##
+// Druid Pelts
+ItemDisplay[!ID RARE CL1]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG CL1 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Barbarian Helms
+ItemDisplay[!ID RARE CL2]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG CL2 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Rare Paladin Shields
+ItemDisplay[!ID RARE CL3]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+// Necromancer Shields
+ItemDisplay[!ID RARE CL4]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG CL4 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Assassin Katars
+ItemDisplay[!ID RARE CL5]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG CL5 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Sorceress Orbs
+ItemDisplay[!ID RARE CL6]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG CL6 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Amazon Javelins
+ItemDisplay[!ID RARE (am5 OR ama OR amf)]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG (am5 OR ama OR amf) ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Staves
+ItemDisplay[!ID RARE WP11]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG WP11 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Wands
+ItemDisplay[!ID RARE WP12]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG WP12 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Scepters
+ItemDisplay[!ID RARE WP13]:%NAME% %GRAY%<%RED%!%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG WP13 ILVL>59]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+
+// ## Everyone's Identifiable Items ##
+// # Magic Jewelry #
+// Magic Rings
+// Cubable to get +3 amulet
+ItemDisplay[!ID MAG rin ILVL>59]:%NAME% %GRAY%<%WHITE%_%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG rin (CLVL>59 AND ILVL<59)]:
+// Magic Amulets
+ItemDisplay[!ID MAG amu]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// Magic Charms
+ItemDisplay[!ID MAG cm1]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG cm2]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+ItemDisplay[!ID MAG cm3]:%NAME% %GRAY%<%RED%?%GRAY%>%WHITE%%CONTINUE%
+// # Rare Jewelry #
+// Rare Rings
+ItemDisplay[!ID RARE rin]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// Rare Amulets
+ItemDisplay[!ID RARE amu]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// # Rare Equipment #
+// Rare Quivers
+ItemDisplay[!ID RARE (aq2 OR cq2)]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// Rare Gloves
+ItemDisplay[!ID RARE EQ4]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// Rare Boots
+ItemDisplay[!ID RARE EQ5]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// Rare Belts
+ItemDisplay[!ID RARE EQ6]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+// Rare Circlets
+ItemDisplay[!ID RARE EQ7]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
+
+// ## Crafting Bases ##
+// # Hit Power #
+// Gloves - Heavy Bracers, Vambraces
+ItemDisplay[MAG (xmg OR umg)]:%NAME%%BLUE% <%ORANGE%Ort%BLUE%>%WHITE%%CONTINUE%
+// # Blood #
+// Helmet - Casque, Armet
+ItemDisplay[MAG (xlm OR ulm)]:%NAME%%RED% <%ORANGE%Ral%RED%>%WHITE%%CONTINUE%
+// Boots - Battle Boots, Mirrored Boots
+ItemDisplay[MAG (xtb OR utb)]:%NAME%%RED% <%ORANGE%Eth%RED%>%WHITE%%CONTINUE%
+// Gloves - Sharkskin Gloves, Vampirebone Gloves
+ItemDisplay[MAG (xvg OR uvg)]:%NAME%%RED% <%ORANGE%Nef%RED%>%WHITE%%CONTINUE%
+// Belt - Mesh Belt, Mythril Coil
+ItemDisplay[MAG (zmb OR umc)]:%NAME%%RED% <%ORANGE%Tal%RED%>%WHITE%%CONTINUE%
+// # Caster #
+// Boots - Demonhide Boots, Wyrmhide Boots
+ItemDisplay[MAG (xlb OR ulb)]:%NAME%%PURPLE% <%ORANGE%Thul%PURPLE%>%WHITE%%CONTINUE%
+// Gloves - Demonhide Gloves, Bramble Mitts
+ItemDisplay[MAG (xlg OR ulg)]:%NAME%%PURPLE% <%ORANGE%Ort%PURPLE%>%WHITE%%CONTINUE%
+// Belt - Sharkskin Belt, Vampirefang Belt
+ItemDisplay[MAG (zvb OR uvc)]:%NAME%%PURPLE% <%ORANGE%Ith%PURPLE%>%WHITE%%CONTINUE%
+// # Safety #
+// Belt - Demonhide Sash, Spiderweb Sash
+ItemDisplay[MAG (zlb OR ulc)]:%NAME%%DGREEN% <%ORANGE%Tal%DGREEN%>%WHITE%%CONTINUE%
+// Shield - Dragon Shield, Monarch
+ItemDisplay[MAG (xit OR uit)]:%NAME%%DGREEN% <%ORANGE%Nef%DGREEN%>%WHITE%%CONTINUE%
+
+// ## Endgame Items ##
+// # Keys #
+ItemDisplay[pk1 OR pk2 OR pk3]:%TAN%%NAME%%WHITE%
+// # Organs #
+ItemDisplay[dhn OR bey OR mbr]:%TAN%%NAME%%WHITE%
+// # Token of Absolution
+ItemDisplay[toa]:%TAN%%NAME%%WHITE%
+// # Essences
+ItemDisplay[tes OR ceh OR bet OR fed]:%TAN%%NAME%%WHITE%
+// # Orb of Corruption
+ItemDisplay[cx5]:%TAN%Chaos Orb%WHITE%
+// # Maps
+ItemDisplay[ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz]:%TAN%%NAME%%WHITE%
+// # Additional
+// Key of Chaos
+ItemDisplay[cx7]:%TAN%%NAME%%WHITE%
+// Orb of Enchantment (whatever that is)
+ItemDisplay[cx8]:%TAN%%NAME%%WHITE%
+
+// ## Mark Automods ##
+// # Helper Low-Lvl Items for weapon swap
+// Vigor Scepter
+ItemDisplay[WP13 SK115>0 CLVL<35]:%NAME% %WHITE%<%GRAY%Vigor%WHITE%>%CONTINUE%
+// Lower Resist Wand
+ItemDisplay[WP12 SK91>0 CLVL<35]:%NAME% %WHITE%<%GRAY%Lower Res%WHITE%>%CONTINUE%
+// Teleport Orb/Staff
+ItemDisplay[(WP11 OR CL6) SK54>0 CLVL<35]:%NAME% %WHITE%<%GRAY%Teleport%WHITE%>%CONTINUE%
+// # Amazon Items #
+// Bows and Javelins
+ItemDisplay[CL7 (TABSK0>2 OR TABSK2>2)]:%NAME% %WHITE%<%ORANGE%3Ama%WHITE%>%CONTINUE%
+// # Paladin Items #
+// Shield Resist
+ItemDisplay[CL3 RES>34]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>%CONTINUE%
+// Shield Damage
+ItemDisplay[CL3 ED>50]:%NAME% %WHITE%<%ORANGE%Dmg%WHITE%>%CONTINUE%
+// Skill Scepters
+ItemDisplay[WP13 SK121>2]:%NAME% %WHITE%<%ORANGE%FoH%WHITE%>%CONTINUE%
+ItemDisplay[WP13 SK101>2]:%NAME% %WHITE%<%ORANGE%HB%WHITE%>%CONTINUE%
+ItemDisplay[WP13 SK112>2]:%NAME% %WHITE%<%ORANGE%BH%WHITE%>%CONTINUE%
+// # Barbarian Items #
+// Skill Helmets
+ItemDisplay[CL2 SK149>2]:%NAME% %WHITE%<%ORANGE%BO%WHITE%>%CONTINUE%
+ItemDisplay[CL2 SK154>2]:%NAME% %WHITE%<%ORANGE%WC%WHITE%>%CONTINUE%
+// # Druid Items #
+// Skill Helmets
+ItemDisplay[CL1 SK221>2]:%NAME% %WHITE%<%ORANGE%Raven%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK227>2]:%NAME% %WHITE%<%ORANGE%SSW%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK237>2]:%NAME% %WHITE%<%ORANGE%SDW%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK247>2]:%NAME% %WHITE%<%ORANGE%Grizzly%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK238>2]:%NAME% %WHITE%<%ORANGE%Rabies%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK239>2]:%NAME% %WHITE%<%ORANGE%FC%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK243>2]:%NAME% %WHITE%<%ORANGE%SW%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK225>2]:%NAME% %WHITE%<%ORANGE%FS%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK229>2]:%NAME% %WHITE%<%ORANGE%MB%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK234>2]:%NAME% %WHITE%<%ORANGE%Fissure%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK240>2]:%NAME% %WHITE%<%ORANGE%Twister%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK244>2]:%NAME% %WHITE%<%ORANGE%Volcano%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK245>2]:%NAME% %WHITE%<%ORANGE%Tornado%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK249>2]:%NAME% %WHITE%<%ORANGE%Armageddon%WHITE%>%CONTINUE%
+ItemDisplay[CL1 SK250>2]:%NAME% %WHITE%<%ORANGE%Hurricane%WHITE%>%CONTINUE%
+// # Necromancer Items #
+// Skill Shields&Wands
+ItemDisplay[(CL4 OR WP12) SK67>2]:%NAME% %WHITE%<%ORANGE%Teeth%WHITE%>%CONTINUE%
+ItemDisplay[(CL4 OR WP12) SK74>2]:%NAME% %WHITE%<%ORANGE%CE%WHITE%>%CONTINUE%
+ItemDisplay[(CL4 OR WP12) SK84>2]:%NAME% %WHITE%<%ORANGE%Bone Spear%WHITE%>%CONTINUE%
+ItemDisplay[(CL4 OR WP12) SK92>2]:%NAME% %WHITE%<%ORANGE%PN%WHITE%>%CONTINUE%
+ItemDisplay[(CL4 OR WP12) SK69>2]:%NAME% %WHITE%<%ORANGE%SM%WHITE%>%CONTINUE%
+// # Sorceress Items #
+// Skill Orbs&Staves
+ItemDisplay[(CL6 OR WP11) SK47>2]:%NAME% %WHITE%<%ORANGE%Fireball%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK56>2]:%NAME% %WHITE%<%ORANGE%Meteor%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK62>2]:%NAME% %WHITE%<%ORANGE%Hydra%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK49>2]:%NAME% %WHITE%<%ORANGE%Lightning%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK53>2]:%NAME% %WHITE%<%ORANGE%CL%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK57>2]:%NAME% %WHITE%<%ORANGE%TS%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK55>2]:%NAME% %WHITE%<%ORANGE%GS%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK59>2]:%NAME% %WHITE%<%ORANGE%Blizzard%WHITE%>%CONTINUE%
+ItemDisplay[(CL6 OR WP11) SK64>2]:%NAME% %WHITE%<%ORANGE%FO%WHITE%>%CONTINUE%
+// # Assassin Items #
+// Skill Katars
+ItemDisplay[CL5 SK262>2]:%NAME% %WHITE%<%ORANGE%WoF%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK266>2]:%NAME% %WHITE%<%ORANGE%BF%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK271>2]:%NAME% %WHITE%<%ORANGE%LS%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK272>2]:%NAME% %WHITE%<%ORANGE%WoI%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK276>2]:%NAME% %WHITE%<%ORANGE%DS%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK277>2]:%NAME% %WHITE%<%ORANGE%Blade Shield%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK278>2]:%NAME% %WHITE%<%ORANGE%Venom%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK274>2]:%NAME% %WHITE%<%ORANGE%BoI%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK259>2]:%NAME% %WHITE%<%ORANGE%FoF%WHITE%>%CONTINUE%
+ItemDisplay[CL5 SK269>2]:%NAME% %WHITE%<%ORANGE%Emberstorm%WHITE%>%CONTINUE%
+
+// ## Runeword Socket Bases ##
+// # Actual runewords #
+// Marks possible good bases as a runeword target. 
+// Doesn't check for automods - the item will be marked as such anyway.
+// Famine - 4 Socket Berserker Axe, Legendary Mallet
+ItemDisplay[NMAG !RW (7wa OR 7wh) SOCK=4]:%NAME% %WHITE%<%TAN%fam%WHITE%>%CONTINUE%
+// Doom, Obedience - 5 Socket Ethereal Spear/Poleaxe (Mercenary Item)
+ItemDisplay[NMAG ETH !RW (7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) SOCK=5]:%NAME% %WHITE%<%TAN%doo|obe%WHITE%>%CONTINUE%
+// Infinity, Insight, Pride - 4 Socket Ethereal Spear/Poleaxe (Mercenary Item)
+ItemDisplay[NMAG ETH !RW (7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) SOCK=4]:%NAME% %WHITE%<%TAN%inf|ins|pri%WHITE%>%CONTINUE%
+// Beast, Grief - 5 Socket Berserker Axe and Phase Blade
+ItemDisplay[NMAG !RW (7wa OR 7cr) SOCK=5]:%NAME% %WHITE%<%TAN%bea|gri%WHITE%>%CONTINUE%
+// Spirit - 4 Socket Crystal Sword, Broad Sword
+ItemDisplay[NMAG !RW (crs OR bsd) SOCK=4]:%NAME% %WHITE%<%TAN%spi%WHITE%>%CONTINUE%
+// Spirit - 4 Socket Monarch
+ItemDisplay[NMAG !RW uit SOCK=4]:%NAME% %WHITE%<%TAN%spi%WHITE%>%CONTINUE%
+// Holy Thunder, Rift - 4 Socket War Sceptre, Divine Sceptre, Caduceus
+ItemDisplay[NMAG !RW (wsp OR 9ws OR 7ws) SOCK=4]:%NAME% %WHITE%<%TAN%ht|rift%WHITE%>%CONTINUE%
+// Heart of the Oak - 4 Socket Flail
+ItemDisplay[NMAG !RW fla SOCK=4]:%NAME% %WHITE%<%TAN%hoto%WHITE%>%CONTINUE%
+// Call to Arms - 5 Socket Flail, Crystal Sword
+ItemDisplay[NMAG !RW (fla OR crs) SOCK=5]:%NAME% %WHITE%<%TAN%cta%WHITE%>%CONTINUE%
+// Memory - 4 Socket Staff
+ItemDisplay[NMAG !RW WP11 SOCK=4]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+// Faith - 4 Socket GMB or Great Bow
+ItemDisplay[NMAG !RW (amc OR 6cb) SOCK=4]:%NAME% %WHITE%<%TAN%fai%WHITE%>%CONTINUE%
+// Passion - 4 Socket Berserker Axe and Phase Blade
+ItemDisplay[NMAG !RW (7wa OR 7cr) SOCK=4]:%NAME% %WHITE%<%TAN%pas%WHITE%>%CONTINUE%
+// Oath - 4 Socket Ethereal Colossal Sword, Colossus Blade (Mercenary Item)
+ItemDisplay[NMAG ETH !RW (7fb OR 7gd) SOCK=4]:%NAME% %WHITE%<%TAN%oat%WHITE%>%CONTINUE%
+// Death - 5 Socket Ethereal Colossal Sword, Colossus Blade (Mercenary Item)
+ItemDisplay[NMAG ETH !RW (7fb OR 7gd) SOCK=5]:%NAME% %WHITE%<%TAN%dea%WHITE%>%CONTINUE%
+// Last Wish - 6 Socket Colossal Sword, Colossus Blade, Phase Blade (Mercenary Item/Normal Item)
+ItemDisplay[NMAG !RW (7fb OR 7gd OR 7wa OR 7cr) SOCK=6]:%NAME% %WHITE%<%TAN%lw%WHITE%>%CONTINUE%
+// Breath of the Dying - 6 Socket Ethereal Colossal Sword, Colossus Blade, Phase Blade
+ItemDisplay[NMAG ETH !RW (7fb OR 7gd OR 7wa OR 7cr) SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>%CONTINUE%
+// Lawbringer - 3 Socket Ethereal Legend Sword (Mercenary Item)
+ItemDisplay[NMAG ETH !RW 72h SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>%CONTINUE%
+// # Good bases #
+// Weapons/Shields
+ItemDisplay[NMAG !RW (7wa OR 7cr OR bsd OR amc) SOCK=0]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+// Merc Weapons
+ItemDisplay[NMAG ETH !RW (7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7 OR 7fb OR 7gd OR 72h) SOCK=0]:%NAME% %WHITE%<%TAN%+%WHITE%>%CONTINUE%
+// Helmet - Bone Visage, Diadem, Tiara
+ItemDisplay[NMAG !RW (ci3 OR uh9 OR ci2) (SOCK=0 OR SOCK>1)]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+// Body Armor
+ItemDisplay[NMAG !ETH !RW (xtp OR utp OR uui) (SOCK=0 OR SOCK>1)]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+// Merc Body Armor/Flex Body Armor
+ItemDisplay[NMAG EQ2 ETH ELT !RW (SOCK=0 OR SOCK>1)]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+// Shields
+ItemDisplay[NMAG !RW (pab OR pac OR ush OR uit) (SOCK=0 OR SOCK>2)]:%NAME% %WHITE%<%TAN%*%WHITE%>%CONTINUE%
+
+// ## Hide Garb(A)ge ##
+// # Hide Low Socket/Magic Armor #
+// Hide Helms, except druid helms, barbarian helms, Bone Visage and Diadem
+ItemDisplay[NMAG EQ1 SOCK=1 CLVL>25]:
+// Don't hide crafting bases
+ItemDisplay[!ID MAG (EQ1 AND !CL1 AND !CL2 AND !ci3) (!xlm AND !ulm) CLVL>25]:
+ItemDisplay[NMAG (EQ1 AND !CL1 AND !CL2 AND !ci3 AND !uh9) SOCK=0 CLVL>25]: 
+// Hide Body Armor, except Dusk Shroud and Archon/Mage Plate
+ItemDisplay[NMAG EQ2 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG EQ2 CLVL>25]:
+ItemDisplay[(!ELT OR !ETH) NMAG (EQ2 AND !uui AND !xtp AND !utp) SOCK=0 CLVL>25]:
+// Hide Shields, except paladin shields, necromancer shields and Monarch/Troll Nest/Ward
+ItemDisplay[NMAG EQ3 SOCK=1 CLVL>25]:
+// Don't hide crafting bases
+ItemDisplay[!ID MAG (EQ3 AND !CL3 AND !CL4) (!xit AND !uit) CLVL>25]:
+ItemDisplay[NMAG (EQ3 AND !CL3 AND !CL4) AND (!uit AND !ush AND !uts) SOCK=0 CLVL>25]:
+// Hide Paladin Shields
+ItemDisplay[NMAG CL3 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG CL3 CLVL>25]:
+ItemDisplay[NMAG CL3 (RES<35 AND ED<51) SOCK=0 CLVL>25]:
+// Hide Gloves, Boots, Belts, except for the crafting bases
+ItemDisplay[NMAG (EQ4 OR EQ5 OR EQ6)]:
+ItemDisplay[!ID MAG (EQ4 OR EQ5 OR EQ6) AND (!xmg AND !umg AND !xtb AND !utb AND !xvg AND !uvg AND !zmb AND !umc AND !xlg AND !ulg AND !zvb AND !uvc AND !xlb AND !ulb AND !zlb AND !ulc) CLVL>25]:
+// # Hide Low Socket/Magic Weapons #
+// Hide Axes, except Berserker Axe
+ItemDisplay[NMAG WP1 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP1 CLVL>25]:
+ItemDisplay[NMAG (WP1 AND !7wa) SOCK=0 CLVL>25]:
+// Hide Maces
+ItemDisplay[NMAG WP2 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP2 CLVL>25]:
+ItemDisplay[NMAG WP2 SOCK=0 CLVL>25]:
+// Hide Swords, except Phase Blade, Legend Sword, Colossal Sword and Colossus Blade
+ItemDisplay[NMAG WP3 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP3 CLVL>25]:
+ItemDisplay[NMAG (WP3 AND !7cr AND !72h AND !7fb AND !7gd) SOCK=0 CLVL>25]:
+// Hide Daggers
+ItemDisplay[NMAG WP4 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP4 CLVL>25]:
+ItemDisplay[NMAG WP4 SOCK=0 CLVL>25]:
+// Hide Throwing, except Amazon throwing
+ItemDisplay[NMAG WP5 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG (WP5 AND !CL7) CLVL>25]:
+ItemDisplay[NMAG (WP5 AND !CL7) SOCK=0 CLVL>25]:
+// Hide Spears, except Stygian Pike, Mancatcher, Ghost Spear, War Pike, Matriarchal Pike and Matriarchal Spear
+ItemDisplay[NMAG WP7 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG (WP7 AND !am5 AND !ama AND !amf) CLVL>25]:
+ItemDisplay[NMAG (WP7 AND !7tr AND !7br AND !7st AND !7p7 AND !amd AND !ame) SOCK=0 CLVL>25]:
+// Hide Polearms, except Colossus Voulge, Thresher, Cryptic Axe, Great Poleaxe and Giant Thresher
+ItemDisplay[NMAG WP8 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP8 CLVL>25]:
+ItemDisplay[NMAG (WP8 AND !7vo AND !7s8 AND !7pa AND !7h7 AND !7wc) SOCK=0 CLVL>25]:
+// Hide Bows, except Great Bow, Matriarchal Bow and GMB
+ItemDisplay[NMAG WP9 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP9 CLVL>25]:
+ItemDisplay[NMAG (WP9 AND !6cb AND !amb AND !amc) SOCK=0 CLVL>25]:
+// Hide XBows
+ItemDisplay[NMAG WP10 SOCK=1 CLVL>25]:
+ItemDisplay[!ID MAG WP10 CLVL>25]:
+ItemDisplay[NMAG WP10 SOCK=0 CLVL>25]:
+// Hide Staves
+ItemDisplay[NMAG WP11 SOCK=1 CLVL>25]:
+// Hide Wands
+ItemDisplay[NMAG WP12 SOCK=1 CLVL>25]:
+// Hide Scepters
+ItemDisplay[NMAG WP13 SOCK=1 CLVL>25]:
+// Hide Katars
+ItemDisplay[NMAG CL5 SOCK=1 CLVL>25]:
+// Hide Orbs
+ItemDisplay[NMAG CL6 SOCK=1 CLVL>25]:
+// # Conditional Hiding of Low Bases #
+// Hide Normal White Non-Class Helms, Armor starting from Nightmare
+ItemDisplay[NMAG !RW NORM (EQ2 OR EQ1) (!EQ7 AND !CL1 AND !CL2) DIFFICULTY>0]:
+// Hide Exceptional White Non-Class Helms and Armor starting from Hell (exception: Mage Plate)
+ItemDisplay[NMAG !RW EXC (EQ2 OR EQ1) (!EQ7 AND !CL1 AND !CL2 AND !xtp) DIFFICULTY>1]:
+// Non-exceptional White damage-oriented weapons on Nightmare and above (exception: Crystal Sword, Broad Sword, Flail)
+ItemDisplay[NMAG !RW WEAPON (!CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !fla AND !crs AND !bsd) NORM DIFFICULTY>0]:
+// Fix to the Crystal Sword/Broad Sword/Flail Exception
+ItemDisplay[NMAG !RW (fla OR crs OR bsd) SOCK<4 DIFFICULTY>0]:
+// Non-elite White damage-oriented weapons on Hell and above
+ItemDisplay[NMAG !RW WEAPON (!CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13) EXC DIFFICULTY>1]:
+// # Hide Garbage Rares #
+// Hide Body Armor
+ItemDisplay[!ID RARE EQ2 CLVL>25]:
+// Hide Non-Class Helmets, but not circlets
+ItemDisplay[!ID RARE EQ1 (!EQ7 AND !CL1 AND !CL2) CLVL>25]:
+// Hide Non-Class Shields
+ItemDisplay[!ID RARE (EQ3 AND !CL3 AND !CL4) CLVL>25]:
+// Non-exceptional rare damage-oriented weapons on Nightmare and above
+ItemDisplay[!ID RARE WEAPON (!CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13) NORM DIFFICULTY>0]:
+// Non-elite rare damage-oriented weapons on Hell and above
+ItemDisplay[!ID RARE WEAPON (!CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13) EXC DIFFICULTY>1]:
+
+// # Hide Garbage Socket Numbers #
+// 3 Socket Staff
+ItemDisplay[NMAG WP11 SOCK=3 CLVL>25]:
+
+// Hide garbage white weapons
+//ItemDisplay[(WEAPON OR ARMOR) AND SOCK<2 NMAG CLVL>30]:
+// Basic blue weapons or armor
+//ItemDisplay[(WEAPON OR ARMOR) MAG CLVL>30]:
+// Non-exceptional yellow weapons on Nightmare and above
+//ItemDisplay[WEAPON RARE NORM DIFFICULTY>0]:
+// Non-elite yellow weapons on Hell and above
+//ItemDisplay[WEAPON RARE EXC DIFFICULTY>1]:
+
+// ## Additional Fluff Rules ##
+// # Helper Markers #
+// Imbue Target = Tiara
+ItemDisplay[NMAG ci3 SOCK=0]:%NAME% %GRAY%<%DGREEN%Imbue%GRAY%>%WHITE%%CONTINUE%
+// # Memes #
+// I had to
+ItemDisplay[UNI 9st]:%GOLD%Honda Sedan%WHITE%%CONTINUE%
+
+// ## Catch all utility rules ##
+// # Ethereality #
+ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
+// # Inferiority #
+ItemDisplay[ID INF]:%NAME% %GRAY%{%RED%Inf%GRAY%}%WHITE%%CONTINUE%
+// # Superiority #
+ItemDisplay[ID SUP]:%NAME% %GRAY%{%BLUE%Sup%GRAY%}%WHITE%%CONTINUE%
+// # Sockets #
+ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
+// # Item Level on equipment #
+ItemDisplay[]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%WHITE%
