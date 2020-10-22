@@ -444,4 +444,4 @@ ItemDisplay[ID SUP]:%NAME% %GRAY%{%BLUE%Sup%GRAY%}%WHITE%%CONTINUE%
 // # Sockets #
 ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
 // # Item Level on equipment #
-ItemDisplay[]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%WHITE%
+ItemDisplay[]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%TAN%
