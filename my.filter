@@ -71,7 +71,7 @@ ItemDisplay[mp4]:
 // Small rejuvenation potion
 ItemDisplay[rvs]:%PURPLE%r%WHITE%
 // Full rejuvenation potion
-ItemDisplay[rvl]:%PURPLE%R%WHITE%
+ItemDisplay[rvl]:%PURPLE%R%WHITE%%NL%TEST
 // Super Healing Potion
 ItemDisplay[hp5]:%RED%R%WHITE%
 // Super Mana Potion
