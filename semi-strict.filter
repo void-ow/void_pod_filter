@@ -426,15 +426,6 @@ ItemDisplay[!ID RARE WEAPON (!CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP1
 // 3 Socket Staff
 ItemDisplay[NMAG WP11 SOCK=3 CLVL>25]:
 
-// Hide garbage white weapons
-//ItemDisplay[(WEAPON OR ARMOR) AND SOCK<2 NMAG CLVL>30]:
-// Basic blue weapons or armor
-//ItemDisplay[(WEAPON OR ARMOR) MAG CLVL>30]:
-// Non-exceptional yellow weapons on Nightmare and above
-//ItemDisplay[WEAPON RARE NORM DIFFICULTY>0]:
-// Non-elite yellow weapons on Hell and above
-//ItemDisplay[WEAPON RARE EXC DIFFICULTY>1]:
-
 // ## Additional Fluff Rules ##
 // # Helper Markers #
 // Imbue Target = Tiara
