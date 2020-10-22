@@ -96,44 +96,24 @@ ItemDisplay[MAG jew]:%ORANGE%J%WHITE%
 ItemDisplay[RARE jew]:%ORANGE%Jewel%WHITE%
 
 // ## Class-specific Identifiable Items ##
-// Magic Druid Pelts
-ItemDisplay[MAG CL1]:%NAME%%CONTINUE%
 // Rare Druid Pelts
 ItemDisplay[RARE CL1]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Barbarian Helms
-ItemDisplay[MAG CL2]:%NAME%%CONTINUE%
 // Rare Barbarian Helms
 ItemDisplay[RARE CL2]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Paladin Shields
-ItemDisplay[MAG CL3]:%NAME%%CONTINUE%
 // Rare Paladin Shields
 ItemDisplay[RARE CL3]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Necromancer Shields
-ItemDisplay[MAG CL4]:%NAME%%CONTINUE%
 // Rare Necromancer Shields
 ItemDisplay[RARE CL4]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Assassin Katars
-ItemDisplay[MAG CL5]:%NAME%%CONTINUE%
 // Rare Assassin Katars
 ItemDisplay[RARE CL5]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Sorceress Orbs
-ItemDisplay[MAG CL6]:%NAME%%CONTINUE%
 // Rare Sorceress Orbs
 ItemDisplay[RARE CL6]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Amazon Bows and Javelins
-ItemDisplay[MAG CL7]:%NAME%%CONTINUE%
 // Rare Amazon Bows and Javelins
 ItemDisplay[RARE CL7]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Staves
-ItemDisplay[MAG WP11]:%NAME%%CONTINUE%
 // Rare Staves
 ItemDisplay[RARE WP11]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Wands
-ItemDisplay[MAG WP12]:%NAME%%CONTINUE%
 // Rare Wands
 ItemDisplay[RARE WP12]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Magic Scepters
-ItemDisplay[MAG WP13]:%NAME%%CONTINUE%
 // Rare Scepters
 ItemDisplay[RARE WP13]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
 
@@ -163,8 +143,11 @@ ItemDisplay[RARE EQ5]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
 ItemDisplay[RARE EQ6]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
 // Rare Circlets
 ItemDisplay[RARE EQ7]:%NAME% %GRAY%<%RED%!%GRAY%>%CONTINUE%
-// Low-tier rare equipment 
-ItemDisplay[RARE (EQ1 OR EQ2 OR EQ3)]:%NAME%%CONTINUE%
+
+// ## Crafting Bases ##
+// # Hit Power #
+// Gloves - Heavy Bracers, Vambraces
+ItemDisplay[MAG (xmg OR umg)]:test%nl%test%CONTINUE%
 
 // ## Endgame Items ##
 // # Keys #
@@ -186,20 +169,45 @@ ItemDisplay[cx7]:%PURPLE%%NAME%%WHITE%
 ItemDisplay[cx8]:%PURPLE%%NAME%%WHITE%
 
 // ## Hide Garb(A)ge ##
-// Basic white weapons or armor with less than 2 sockets
-ItemDisplay[(WEAPON OR ARMOR) AND SOCK<2 NMAG CLVL>30]:
+// # Hide Low Socket/Magic Armor #
+// Hide Helms, except druid helms and barbarian helms
+ItemDisplay[NMAG EQ1 SOCK=1 CLVL>25]:
+// Don't hide crafting bases
+ItemDisplay[MAG EQ1 (!xlm AND !ulm) CLVL>25]:
+ItemDisplay[NMAG (EQ1 AND !CL1 AND !CL2) SOCK=0 CLVL>25]: 
+// Hide Body Armor, except Dusk Shroud and Archon/Mage Plate
+ItemDisplay[NMAG EQ2 SOCK=1 CLVL>25]:
+ItemDisplay[MAG EQ2 CLVL>25]:
+ItemDisplay[(!ELT OR !ETH) NMAG (EQ2 AND !uui AND !xtp AND !utp) SOCK=0 CLVL>25]:
+// Hide Shields, except paladin shields, necromancer shields and Monarch/Troll Nest/Ward
+ItemDisplay[NMAG EQ3 SOCK=1 CLVL>25]:
+// Don't hide crafting bases
+ItemDisplay[MAG EQ3 (!xit AND !uit) CLVL>25]:
+ItemDisplay[NMAG (EQ3 AND !CL3 AND !CL4) AND (!uit AND !ush AND !uts) SOCK=0 CLVL>25]:
+// Hide Paladin Shields
+ItemDisplay[NMAG CL3 SOCK=1 CLVL>25]:
+ItemDisplay[MAG CL3 CLVL>25]:
+ItemDisplay[NMAG CL3 RES<35 SOCK=0 CLVL>25]:
+// Hide Gloves, Boots, Belts, except for the crafting bases
+ItemDisplay[NMAG (EQ4 OR EQ5 OR EQ6)]:
+ItemDisplay[MAG (EQ4 OR EQ5 OR EQ6) AND (!xmg AND !umg AND !xtb AND !utb AND !xvg AND !uvg AND !zmb AND !umc AND !xlg AND !ulg AND !zvb AND !uvc AND !xlb AND !ulb AND !zlb AND !ulc) CLVL>25]:
+
+// Hide garbage white weapons
+//ItemDisplay[(WEAPON OR ARMOR) AND SOCK<2 NMAG CLVL>30]:
 // Basic blue weapons or armor
-ItemDisplay[(WEAPON OR ARMOR) MAG CLVL>30]:
+//ItemDisplay[(WEAPON OR ARMOR) MAG CLVL>30]:
 // Non-exceptional yellow weapons on Nightmare and above
-ItemDisplay[WEAPON RARE NORM DIFFICULTY>0]:
+//ItemDisplay[WEAPON RARE NORM DIFFICULTY>0]:
 // Non-elite yellow weapons on Hell and above
-ItemDisplay[WEAPON RARE EXC DIFFICULTY>1]:
+//ItemDisplay[WEAPON RARE EXC DIFFICULTY>1]:
 
 // ## Catch all utility rules ##
 // # Ethereality #
-ItemDisplay[ETH]:%NAME% %GRAY%Eth%WHITE%%CONTINUE%
+ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
 // # Inferiority #
-ItemDisplay[INF]:%NAME% %RED%Inf%WHITE%%CONTINUE%
+ItemDisplay[INF]:%NAME% %GRAY%{%RED%Inf%GRAY%}%WHITE%%CONTINUE%
+// # Superiority #
+ItemDisplay[INF]:%NAME% %GRAY%{%BLUE%Sup%GRAY%}%WHITE%%CONTINUE%
 // # Sockets #
 ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
 // # Item Level on equipment #
