@@ -194,11 +194,11 @@ ItemDisplay[ETH (EQ4 OR EQ5 OR EQ6) (MAG OR RARE)]:
 // I'll take my chances.
 
 // # Sockets #
-ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
+ItemDisplay[SOCK>0]:%NAME%%GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
 // # Ethereality #
-ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
+ItemDisplay[ETH]:%NAME%-%GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
 // # Superiority #
-ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
+ItemDisplay[SUP]:%NAME%#%GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 // # Item Level #
 // Alright, this can get really ugly performance-wise, since every item in the game got an item level, so extra care should be taken here.
 // There are actually 3 distinct situations where you care about an item level.
@@ -231,7 +231,7 @@ ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 // and since, realistically, it does not carry that much information, i'd rather do away with it if I can.
 //
 // Therefore, the ilvl rule is as follows:
-ItemDisplay[(ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0) OR ((rin OR amu) MAG)]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%WHITE%%CONTINUE%
+ItemDisplay[(ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0) OR ((rin OR amu) MAG)]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%GOLD%%CONTINUE%
 
 // ## Common Items ##
 
