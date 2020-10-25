@@ -15,15 +15,15 @@ ItemDisplay[GOLD<10000]:
 // # Hide scrolls #
 // The second most common thing
 // Town Portal Scroll - show until act 3 Normal
-ItemDisplay[tsc ILVL<21]:%TAN%Scroll of Town Portal%WHITE%
+ItemDisplay[tsc CLVL<21]:%TAN%Scroll of Town Portal%WHITE%
 ItemDisplay[tsc]:
 // Identify Scroll - show until act 2 Normal
-ItemDisplay[isc ILVL<14]:%TAN%Scroll of Identification%WHITE%
+ItemDisplay[isc CLVL<14]:%TAN%Scroll of Identification%WHITE%
 ItemDisplay[isc]:
 
 // # Hide Healing/Mana Potions #
 // Lesser Healing Potion - show until Act 2 Normal
-ItemDisplay[hp1 ILVL<14]:%RED%less%WHITE%
+ItemDisplay[hp1 CLVL<14]:%RED%less%WHITE%
 ItemDisplay[hp1]: 
 // Light Healing Potion - show throughout all Normal
 ItemDisplay[hp2 DIFFICULTY=0]:%RED%light%WHITE%
@@ -35,7 +35,7 @@ ItemDisplay[hp3]:
 ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
 ItemDisplay[hp4]:
 // Lesser Mana Potion - show until act 3 Normal
-ItemDisplay[mp1 ILVL<21]:%BLUE%less%WHITE%
+ItemDisplay[mp1 CLVL<21]:%BLUE%less%WHITE%
 ItemDisplay[mp1]:
 // Light Mana Potion - show throughout all Normal
 ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%light%WHITE%
@@ -192,13 +192,17 @@ ItemDisplay[ETH (EQ4 OR EQ5 OR EQ6) (MAG OR RARE)]:
 //
 // All in all, the choice is between a possible %CONTINUE% performance hotspot and multiple additional convoluted lines that will 100% affect performance.
 // I'll take my chances.
+//
+// Of course, it would've been too easy if that was it. Unfortunately, there are some other issues with this. If you pre marker it like that, if the item is filtered out
+// at some point after it, it will be shown as a " " (blank space) on the ground. That's really annoying and makes no sense.
+// Which means that we have to fix it, and the fix will be ugly.
 
 // # Sockets #
-ItemDisplay[SOCK>0]:%NAME%%GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
+ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
 // # Ethereality #
-ItemDisplay[ETH]:%NAME%-%GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
+ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
 // # Superiority #
-ItemDisplay[SUP]:%NAME%#%GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
+ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 // # Item Level #
 // Alright, this can get really ugly performance-wise, since every item in the game got an item level, so extra care should be taken here.
 // There are actually 3 distinct situations where you care about an item level.
@@ -496,6 +500,9 @@ ItemDisplay[UNI OR SET]:%NAME%
 
 // ## Whitelist ##
 
+// # Item Rarity Rules #
+// Starting from Nightmare, don't show irrelevant magic items.
+ItemDisplay[(ARMOR OR WEAPON) MAG DIFFICULTY=0]:%NAME%
 // # Levelling Rules #
 // Levelling rules are not dependant on the difficulty or the character level. Instead, they depend on the area level of a location the item is dropped in.
 // The item level of a dropped item is never lower than the area level, therefore we can use it to filter out stuff.
@@ -504,9 +511,9 @@ ItemDisplay[UNI OR SET]:%NAME%
 // This alvl correlates with the alvl of Harem in Act 2 and last two levels of Hell Tower Cellar.
 // Quite arbitrary, I know, but it represents around 85% of all of this difficulty's items being available, which means that, realistically, there's no reason to see items from the previous difficulty.
 // Also, these rules don't conflict with any other rules that come before them - for example, you'll still see 5os Crystal Swords, even in high alvl areas.
-ItemDisplay[NORM (ARMOR OR WEAPON) ILVL<47]:%NAME%
-ItemDisplay[EXC (ARMOR OR WEAPON) ILVL<78]:%NAME%
-ItemDisplay[ELT (ARMOR OR WEAPON) ILVL<85]:%NAME%
+ItemDisplay[NORM !MAG (ARMOR OR WEAPON) ILVL<47]:%NAME%
+ItemDisplay[EXC !MAG (ARMOR OR WEAPON) ILVL<78]:%NAME%
+ItemDisplay[ELT !MAG (ARMOR OR WEAPON) ILVL<85]:%NAME%
 // The whitelist's backbone - hiding everything, including non-equipment equipment items - charms and arrows.
 // Scary stuff - anything not mentioned in all of the previous rules will be hidden from sight.
 ItemDisplay[ARMOR OR WEAPON OR rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR aq2 OR cq2]:
