@@ -375,7 +375,7 @@ ItemDisplay[(ush OR uit) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
 // As a personal preference, I like my colors to be consistent along the filter, and the currency color is TAN.
 // So, while this creates a rule that 99.9% of time will be skipped by the dropped items, I still want stuff to look good.
 // Includes: Keys, Organs, Token of Absolution, Essences, Orb of Corruption, Maps, Key of Chaos, Orb of Enchantment (whatever that is)
-ItemDisplay[pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR toa OR tes OR ceh OR bet OR fed OR cx5 OR ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz OR cx7 OR cx8]:%TAN%%NAME% %GRAY%<%RED%!%GRAY%>%TAN%
+ItemDisplay[pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR toa OR tes OR ceh OR bet OR fed OR cx5 OR ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz OR cx7 OR cx8]:%TAN%%NAME% %GRAY%<%RED%*%GRAY%>%TAN%
 
 // ## Magic Items ##
 
@@ -424,9 +424,9 @@ ItemDisplay[(aq2 OR cq2) MAG DIFFICULTY=0]:%NAME%
 
 // # Charms #
 // Breakpoint levels - 91 for small and large charms
-ItemDisplay[(cm1 OR cm3) ILVL>90 MAG]:%NAME% %GRAY%<%RED%!%GRAY%>%BLUE%
+ItemDisplay[(cm1 OR cm3) ILVL>90 MAG]:%NAME% %GRAY%<%RED%*%GRAY%>%BLUE%
 // 74 for medium
-ItemDisplay[cm2 ILVL>73 MAG]:%NAME% %GRAY%<%RED%!%GRAY%>%BLUE%
+ItemDisplay[cm2 ILVL>73 MAG]:%NAME% %GRAY%<%RED%*%GRAY%>%BLUE%
 // Default Charm display
 ItemDisplay[(cm1 OR cm2 OR cm3) MAG]:%NAME% %GRAY%<%RED%?%GRAY%>%BLUE%
 
@@ -446,25 +446,25 @@ ItemDisplay[MAG (amb OR amc OR am5 OR ama OR amf OR 9cs OR 9lw OR 9tw OR 9qr OR 
 
 // # Armor Items #
 // Gloves, Boots, Belts
-ItemDisplay[(EQ4 OR EQ5 OR EQ6) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+ItemDisplay[(EQ4 OR EQ5 OR EQ6) RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
 
 // # Jewelry #
 // Amulets with higher ilvl than 89 are important, since they spawn +2 to classkills
-ItemDisplay[amu ILVL>89 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+ItemDisplay[amu ILVL>89 RARE]:%NAME% %GRAY%<%RED%**%GRAY%>%YELLOW%
 // Rings with higher ilvl than 85 are important, since they spawn all of the available mods
-ItemDisplay[rin ILVL>85 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+ItemDisplay[rin ILVL>85 RARE]:%NAME% %GRAY%<%RED%**%GRAY%>%YELLOW%
 // Default rings and amulets
-ItemDisplay[(rin OR amu) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+ItemDisplay[(rin OR amu) RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
 
 // # Quivers #
 // Arrows and Bolts
-ItemDisplay[(aq2 OR cq2) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+ItemDisplay[(aq2 OR cq2) RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
 
 // # Circlets #
 // Circlets with higher ilvl than 89 are important, since they spawn +2 to classkills
-ItemDisplay[EQ7 ILVL>89 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+ItemDisplay[EQ7 ILVL>89 RARE]:%NAME% %GRAY%<%RED%**%GRAY%>%YELLOW%
 // Default Circlets
-ItemDisplay[EQ7 RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+ItemDisplay[EQ7 RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
 
 // # Class-specific #
 // The usual stuff - Druid Helms, Barbarian Helms, Necromancer Shields, Assassin Katars(only the ones that can have automods),
@@ -488,11 +488,11 @@ ItemDisplay[9st UNI]:%GOLD%Honda Sedan
 
 // # Highlight rings & amulets #
 // Hype it up
-ItemDisplay[(rin OR amu) (UNI OR SET)]:%NAME% %GRAY%<%RED%!!%GRAY%>%GOLD%
+ItemDisplay[(rin OR amu) (UNI OR SET)]:%NAME% %GRAY%<%RED%**%GRAY%>%GOLD%
 
 // # Highlight Elite Uniques&Sets #
 // On average, they are supposed to be good. I don't want to put any more logic into unique stuff detection, because it'd take a toll on performance
-ItemDisplay[(UNI OR SET) ELT]:%NAME% %GRAY%<%RED%!%GRAY%>%GOLD%
+ItemDisplay[(UNI OR SET) ELT]:%NAME% %GRAY%<%RED%*%GRAY%>%GOLD%
 
 // # Show all unique&set items #
 // Duh
