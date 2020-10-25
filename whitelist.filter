@@ -1,0 +1,512 @@
+// Void's Whitelist Filter
+
+// ### Commodities Blacklist ###
+// For the performance side of things, this should be ordered from more common to less common
+// While it is possible to use the whitelist, and just wait for the stuff to drop to the bottom
+// it is not the correct move - because it will cause tremendous lag since it would compare all of the commodities with every line
+
+// ## Miscellaneous ##
+
+// # Hide gold #
+// It is the most common thing to drop, I would assume
+// Gold - pretty much irrelevant anyway, you'd want to pick up items and sell them for gold cap
+ItemDisplay[GOLD<10000]:
+
+// # Hide scrolls #
+// The second most common thing
+// Town Portal Scroll - show until act 3 Normal
+ItemDisplay[tsc ILVL<21]:%TAN%Scroll of Town Portal%WHITE%
+ItemDisplay[tsc]:
+// Identify Scroll - show until act 2 Normal
+ItemDisplay[isc ILVL<14]:%TAN%Scroll of Identification%WHITE%
+ItemDisplay[isc]:
+
+// # Hide Healing/Mana Potions #
+// Lesser Healing Potion - show until Act 2 Normal
+ItemDisplay[hp1 ILVL<14]:%RED%less%WHITE%
+ItemDisplay[hp1]: 
+// Light Healing Potion - show throughout all Normal
+ItemDisplay[hp2 DIFFICULTY=0]:%RED%light%WHITE%
+ItemDisplay[hp2]:
+// Healing Potion - show throughout all Normal
+ItemDisplay[hp3 DIFFICULTY=0]:%RED%norm%WHITE%
+ItemDisplay[hp3]:
+// Greater Healing Potion - show throughout all Nightmare
+ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
+ItemDisplay[hp4]:
+// Lesser Mana Potion - show until act 3 Normal
+ItemDisplay[mp1 ILVL<21]:%BLUE%less%WHITE%
+ItemDisplay[mp1]:
+// Light Mana Potion - show throughout all Normal
+ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%light%WHITE%
+ItemDisplay[mp2]:
+// Mana Potion - show throughout all Normal
+ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%norm%WHITE%
+ItemDisplay[mp3]:
+// Greater Mana Potion - show throughout all Nightmare
+ItemDisplay[mp4 DIFFICULTY<2]:%BLUE%mp%WHITE%
+ItemDisplay[mp4]:
+// Small rejuvenation potion - show throughout all Nightmare
+ItemDisplay[rvs DIFFICULTY<2]:%PURPLE%rp%WHITE%
+ItemDisplay[rvs]:
+
+// # Hide utility potions & keys #
+// Key - while it is funny to get a key in a locked chest, it's pointless to show them
+ItemDisplay[key]:
+// Stamina potion
+ItemDisplay[vps]:
+// Antidote potion
+ItemDisplay[yps]:
+// Thawing potion
+ItemDisplay[wms]:
+
+// # Rename usable consumables # - Color coded as a potion color
+// Super Healing Potion
+ItemDisplay[hp5]:%RED%HP%WHITE%
+// Super Mana Potion
+ItemDisplay[mp5]:%BLUE%MP%WHITE%
+// Full rejuvenation potion
+ItemDisplay[rvl]:%PURPLE%RP%WHITE%
+
+// # Hide Common Ranged items #
+// Rusted Arrows
+ItemDisplay[aqv]:
+// Rusted Bolts:
+ItemDisplay[cqv]:
+// Throwing Potions
+ItemDisplay[gpm OR opm OR opl OR ops OR gps OR gpl]:
+
+// ## Socketables ##
+
+// # Gems #
+// Non-flawless gems - Not needed for rune upgrades anymore, but still, might be good to plop them while levelling
+// Flawless gems start dropping from Nightmare, at that point we should hide the inferior ones.
+ItemDisplay[GEMLEVEL>0 GEMLEVEL<4 DIFFICULTY<1]:%ORANGE%%NAME%
+ItemDisplay[GEMLEVEL>0 GEMLEVEL<4]:
+// Flawless Gems - Gems are not created equal, some are needed in crafting and some are not. Additionally, some of them are skulls
+// Crafting Gems - Ruby, Amethyst, Sapphire, Emerald
+ItemDisplay[gzv OR glb OR glg OR glr OR skl]:%ORANGE%Gem+%WHITE%
+// Remaining Gems
+// Literally no use for them in the endgame - so we should stop showing them there
+ItemDisplay[GEMLEVEL>0 GEMLEVEL=4 ILVL<85]:%ORANGE%Gem%WHITE%
+ItemDisplay[GEMLEVEL>0 GEMLEVEL=4]:
+// Perfect Gems - no need for special distinction, in my opinion.
+ItemDisplay[GEMLEVEL>0 GEMLEVEL=5]:%ORANGE%%NAME%
+// # Runes #
+// Crafting Runes 4-10
+ItemDisplay[RUNE>3 RUNE<10]:%ORANGE%%NAME%%GRAY% <%ORANGE%c%GRAY%> %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
+// Default Runes
+ItemDisplay[RUNE>0]:%ORANGE%%NAME% %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
+// # Jewels #
+ItemDisplay[jew MAG !ID]:%ORANGE%Jwl%WHITE%
+ItemDisplay[jew RARE !ID]:%ORANGE%Jewel%WHITE%
+
+// ### Item Filter ###
+// Here, the difference between a whitelist and a blacklist should be minimal, since there is no way of telling what items should
+// be less common and which should be more common with 100% certainty. Even rarity is kind of in a flux, since that would 
+// depend on a magic find. Therefore, it makes sense to structure a filter in a way it's easily readable and changable for a human being
+// That does not mean there are no optimizations to make - just as a general note, the individual item filtering order should not matter THAT much
+
+// ## Insta-Hide ##
+// For the great performance gainz, there's nothing better than straight-up hiding some stuff.
+// I know, I know, this goes against the whole idea of a whitelist, and if we didn't have performance constraints,
+// I wouldn't even thought of doing this. But, well, it makes sense here.
+
+// # Common Items #
+// Inferior - no reason to show inferior items. The only case for inferior items that can be made is caster bases with automods
+// Just in case someone already did a runeword in an inferior base, we'd want to not hide it
+ItemDisplay[INF (ARMOR OR WEAPON) !RW]:
+// 1-Socket Items
+// There is no reason to ever use a Common item with one socket.
+// Except maybe at the start of the game, but even then it's kind of a stretch.
+ItemDisplay[SOCK=1 NMAG ILVL>13]:
+// 0 socket Items that can never have more than 1 socket
+// Same as the above. This mainly includes wands, knives and a buckler.
+// Full List: Buckler, Dagger, Poignard, Bone Knife, Dirk, Rondel, Mithril Point, Wand, Burnt Wand, Yew Wand, Petrified Wand 
+ItemDisplay[(buc OR dgr OR 9dg OR 7dg OR dir OR 9di OR 7di OR wnd OR 9wn OR ywn OR 9yw) NMAG]:
+// Common Boots, Gloves, Belt
+// There is no reason to ever use Common Boots, Gloves or Belt other than for the first five minutes of the game
+ItemDisplay[(EQ4 OR EQ5 OR EQ6) NMAG]:
+
+// # Magic/Rare Items #
+// Ethereal Boots, Gloves, Belt
+// A point can be made that an ethereal Boots, Gloves and Belt can be worn by an untouchable demigod
+// and never use their durability up, but realistically...
+ItemDisplay[ETH (EQ4 OR EQ5 OR EQ6) (MAG OR RARE)]:
+
+// ## General Markers ##
+// !Possible performance hotspot! I am not sure how %CONTINUE% impacts the filter lag, but I assume that the performance impact should be negligable
+// Nevertheless, it is kinda bad that here we are doing an action with an item that will, in 99% of the times, be tossed away down the line,
+// but the readablity improvements and the filter structure improves dramatically using this approach
+// Q: Hey, can we filter items first and then add markers to the ones that survive?
+// A: Nah, that's not a thing, unless you want to do some highly-specific and borderline asinine shit. Let me explain:
+//
+// Let's say you want to only show a cap in your filter and you want it to display sockets.
+// You'd want to do that in "efficient" way, right? It's gonna go a little something like this:
+//
+// ItemDisplay[cap]:%NAME%%CONTINUE%
+// ItemDisplay[]:
+// ItemDisplay[SOCK>0]:%NAME% (%SOCKETS%)
+//
+// Nah, that won't work - the cap will not show up at all. It will drop down after %CONTINUE% and will be filtered out on the next line.
+// What's the other obvious solution then?
+// Well, to add the socket number SPECIFICALLY for the individual cap here:
+//
+// ItemDisplay[cap SOCK=0]:%NAME%
+// ItemDisplay[cap]:%NAME% (%SOCKETS%)
+// ItemDisplay[]:
+//
+// In terms of performance - that's some good shit right there: if the cap got no sockets (the most probable outcome) it is filtered right away,
+// and then if not, it drops down to the next line, where, obvously, it will have sockets. The average line efficiency if a cap is dropped is close to 1.
+// Sounds good right? Well, not really. As you can already tell, it makes you create practically duplicated lines for one item, which reduces the
+// filter structure clarity. What that means is, that if you want to change some stuff, like you don't want to see the cap anymore, you'd have to change
+// 2 lines instead of one. Additionally, the readablity also suffers. Now it reads less than a lootfilter and more of a murder mystery, especially if
+// you're not the person that wrote the filter, or you came back after a ladder reset and you're trying to figure out why cap is filtered out.
+// Additionally additionally, imagine if you also want to track some other item status, like ethereability. You'd have to create 4 different lines for your cap
+// (non-socket non-eth, socket non-eth, non-socket eth, socket eth), that EVERY item will have to go through. That's 4 additional operations.
+// Is it even the most performant solution at that point?
+//
+// Alright, what the other approach? Using a %CONTINUE% marker. There are two ways we can go about it - pre marker and post marker.
+// Let's look at the post marker:
+//
+// ItemDisplay[cap]:%NAME%%CONTINUE%
+// ItemDisplay[SOCK>0]:%NAME% (%SOCKETS%)
+// ItemDisplay[]:
+//
+// This makes sense, right? We get the best of both worlds - we get a cap, and if it happens to have sockets, it will be shown. 
+// Except that it is not technically correct. The cap without a socket will not be shown at all - it will go through %CONTINUE% and will be filtered out line 3.
+// Also, EVERY item that has a socket will be shown now, which effectively breaks the filter logic completely.
+// All of this can be fixed, but it will require some hacky additional lines just so it'll work, and that would (obvously) impact the performance negatively.
+//
+// Okay, so what about the pre marker approach? I'm glad you asked:
+//
+// ItemDisplay[SOCK>0]:%NAME% (%SOCKETS%) %CONTINUE%
+// ItemDisplay[cap]:%NAME%
+// ItemDisplay[]:
+//
+// Looks clean, simple and it doesn't impact the filter logic at all. The only issue is: every item in the game that has a socket will go through %CONTINUE%.
+// Is this bad? Well...
+// That depends on how performance-intensive %CONTINUE% is.
+// In reality, most of the items that drop for a whitelist will have to go through every rule anyway, not match any, and be tossed out.
+// Depending on the difference between a non-match match and %CONTINUE% operator it will either not matter at all, or be a giant performance hotspot.
+//
+// All in all, the choice is between a possible %CONTINUE% performance hotspot and multiple additional convoluted lines that will 100% affect performance.
+// I'll take my chances.
+
+// # Sockets #
+ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
+// # Ethereality #
+ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
+// # Superiority #
+ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
+// # Item Level #
+// Alright, this can get really ugly performance-wise, since every item in the game got an item level, so extra care should be taken here.
+// There are actually 3 distinct situations where you care about an item level.
+// 1. <41 ilvl Common Items - since they might not give the expected number of Lazruk sockets.
+// 2. Crafting Magic Items - since the resulting crafted item depends on the ilvl of a base.
+// 3. Mods on rare/magic items - depending on the ilvl you might not want to pick stuff up.
+// Let's go over them one-by-one.
+//
+// Number 1 - no qualms here, let's add the ilvl to every NMAG item that's lower than 41 ilvl. Next.
+//
+// Number 2 - primer on that over here: http://classic.battle.net/diablo2exp/items/crafteditems.shtml
+// My question is - How important is that? Probably pretty important, so let's add Magic crafting bases to the ilvl list.
+// Rings and amulets will be included here, while the other crafting bases - in the crafting section. Next.
+//
+// Number 3 - let's take a look at the affixes: http://classic.battle.net/diablo2exp/items/magic/pre.shtml
+// That's just the prefixes, suffixes are here: http://classic.battle.net/diablo2exp/items/magic/suf.shtml
+// So, what is important here? Well, anything below ilvl 67 is automatically irrelevant, since that's the lowest Hell ilvl you can get.
+// Let's bump it out higher and assume that the lowest ilvl location you'd farm would be Tower Cellar with ilvl 75 (source: https://diablo2.diablowiki.net/Area_Level)
+// So, what items might have important affixes that can only appear at ilvl 76+ ?
+// Reading through all of that, it's fairly obvious it's at least Rare circlets and amulets - the +2 to skills appears only at ilvl 90+.
+// Additionally, +manasteal also only apprears at the Rare rings with ilvl 86+
+// Also, we're forgetting charms that have their own separate list of affixes: http://classic.battle.net/diablo2exp/items/charms.shtml
+// Small Charms reach their full potential at 91 ilvl, disregarding elemental damage they do it at 85 ilvl.
+// Medium Charms mature at ilvl 74, which is perfect for us, but also, nobody cares about them in the first place:(
+// Large Charms are important - ilvl 91 is the time where they become really tasty.
+// 
+// The bottom line - Rare Circlets/Amulets/Rings and Magic Small/Large Charms need an ilvl descriptor.
+// Or do they?
+// Personally, I feel like just adding a marker on the high-value ilvl items makes a lot more sense. The item level notation looks bulky if it's present a lot
+// and since, realistically, it does not carry that much information, i'd rather do away with it if I can.
+//
+// Therefore, the ilvl rule is as follows:
+ItemDisplay[(ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0) OR ((rin OR amu) MAG)]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%WHITE%%CONTINUE%
+
+// ## Common Items ##
+
+// # Runewords #
+ItemDisplay[RW]:%NAME%
+
+// # Items with Automods #
+// - Amazon Items -
+// Bows and Spears
+// Makes sense to only show the best ones in the endgame areas
+ItemDisplay[ILVL<78 CL7 NMAG (TABSK0>2 OR TABSK2>2)]:%NAME% %WHITE%<%ORANGE%+3%WHITE%>
+ItemDisplay[(amb OR amc OR amd OR ame) NMAG (TABSK0>2 OR TABSK2>2)]:%NAME% %WHITE%<%ORANGE%+3%WHITE%>
+// - Paladin Items -
+// For shields, it makes sense to only show the best ones in the endgame areas
+// Shield Resist 
+ItemDisplay[ILVL<78 CL3 NMAG RES>34 ]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>
+ItemDisplay[(pab OR pac) NMAG RES>34]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>
+// Shield Damage
+ItemDisplay[ILVL<78 CL3 NMAG ITEMSTAT17>50]:%NAME% %WHITE%<%ORANGE%Dmg%WHITE%>
+ItemDisplay[(pab OR pac) NMAG ITEMSTAT17>50]:%NAME% %WHITE%<%ORANGE%Dmg%WHITE%>
+// Skill Scepters
+ItemDisplay[WP13 NMAG SK121>2]:%NAME% %WHITE%<%ORANGE%FoH%WHITE%>
+ItemDisplay[WP13 NMAG SK101>2]:%NAME% %WHITE%<%ORANGE%HB%WHITE%>
+ItemDisplay[WP13 NMAG SK112>2]:%NAME% %WHITE%<%ORANGE%BH%WHITE%>
+ItemDisplay[WP13 NMAG SK111>2]:%NAME% %WHITE%<%ORANGE%Ven%WHITE%>
+// - Barbarian Items -
+// Skill Helmets
+ItemDisplay[CL2 NMAG SK149>2]:%NAME% %WHITE%<%ORANGE%BO%WHITE%>
+ItemDisplay[CL2 NMAG SK154>2]:%NAME% %WHITE%<%ORANGE%WC%WHITE%>
+// - Druid Items -
+// Skill Helmets
+ItemDisplay[CL1 NMAG SK221>2]:%NAME% %WHITE%<%ORANGE%Raven%WHITE%>
+ItemDisplay[CL1 NMAG SK237>2]:%NAME% %WHITE%<%ORANGE%SDW%WHITE%>
+ItemDisplay[CL1 NMAG SK247>2]:%NAME% %WHITE%<%ORANGE%Grizzly%WHITE%>
+ItemDisplay[CL1 NMAG SK238>2]:%NAME% %WHITE%<%ORANGE%Rabies%WHITE%>
+ItemDisplay[CL1 NMAG SK239>2]:%NAME% %WHITE%<%ORANGE%FC%WHITE%>
+ItemDisplay[CL1 NMAG SK243>2]:%NAME% %WHITE%<%ORANGE%SW%WHITE%>
+ItemDisplay[CL1 NMAG SK225>2]:%NAME% %WHITE%<%ORANGE%FS%WHITE%>
+ItemDisplay[CL1 NMAG SK229>2]:%NAME% %WHITE%<%ORANGE%MB%WHITE%>
+ItemDisplay[CL1 NMAG SK234>2]:%NAME% %WHITE%<%ORANGE%Fissure%WHITE%>
+ItemDisplay[CL1 NMAG SK240>2]:%NAME% %WHITE%<%ORANGE%Twister%WHITE%>
+ItemDisplay[CL1 NMAG SK244>2]:%NAME% %WHITE%<%ORANGE%Volcano%WHITE%>
+ItemDisplay[CL1 NMAG SK245>2]:%NAME% %WHITE%<%ORANGE%Tornado%WHITE%>
+ItemDisplay[CL1 NMAG SK249>2]:%NAME% %WHITE%<%ORANGE%Armageddon%WHITE%>
+ItemDisplay[CL1 NMAG SK250>2]:%NAME% %WHITE%<%ORANGE%Hurricane%WHITE%>
+// - Necromancer Items -
+// Skill Shields&Wands
+ItemDisplay[(CL4 OR WP12) NMAG SK67>2]:%NAME% %WHITE%<%ORANGE%Teeth%WHITE%>
+ItemDisplay[(CL4 OR WP12) NMAG SK74>2]:%NAME% %WHITE%<%ORANGE%CE%WHITE%>
+ItemDisplay[(CL4 OR WP12) NMAG SK84>2]:%NAME% %WHITE%<%ORANGE%Bone Spear%WHITE%>
+ItemDisplay[(CL4 OR WP12) NMAG SK92>2]:%NAME% %WHITE%<%ORANGE%PN%WHITE%>
+ItemDisplay[(CL4 OR WP12) NMAG SK69>2]:%NAME% %WHITE%<%ORANGE%SM%WHITE%>
+// - Sorceress Items -
+// Skill Orbs&Staves
+ItemDisplay[(CL6 OR WP11) NMAG SK47>2]:%NAME% %WHITE%<%ORANGE%Fireball%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK56>2]:%NAME% %WHITE%<%ORANGE%Meteor%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK62>2]:%NAME% %WHITE%<%ORANGE%Hydra%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK49>2]:%NAME% %WHITE%<%ORANGE%Lightning%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK54>2]:%NAME% %WHITE%<%ORANGE%CL%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK55>2]:%NAME% %WHITE%<%ORANGE%GS%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK59>2]:%NAME% %WHITE%<%ORANGE%Blizzard%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK64>2]:%NAME% %WHITE%<%ORANGE%FO%WHITE%>
+ItemDisplay[(CL6 OR WP11) NMAG SK58>2]:%NAME% %WHITE%<%ORANGE%ES%WHITE%>
+// - Assassin Items -
+// Skill Katars
+ItemDisplay[CL5 NMAG SK262>2]:%NAME% %WHITE%<%ORANGE%WoF%WHITE%>
+ItemDisplay[CL5 NMAG SK266>2]:%NAME% %WHITE%<%ORANGE%BF%WHITE%>
+ItemDisplay[CL5 NMAG SK271>2]:%NAME% %WHITE%<%ORANGE%LS%WHITE%>
+ItemDisplay[CL5 NMAG SK272>2]:%NAME% %WHITE%<%ORANGE%WoI%WHITE%>
+ItemDisplay[CL5 NMAG SK276>2]:%NAME% %WHITE%<%ORANGE%DS%WHITE%>
+ItemDisplay[CL5 NMAG SK277>2]:%NAME% %WHITE%<%ORANGE%Blade Shield%WHITE%>
+ItemDisplay[CL5 NMAG SK278>2]:%NAME% %WHITE%<%ORANGE%Venom%WHITE%>
+ItemDisplay[CL5 NMAG SK274>2]:%NAME% %WHITE%<%ORANGE%BoI%WHITE%>
+ItemDisplay[CL5 NMAG SK269>2]:%NAME% %WHITE%<%ORANGE%Emberstorm%WHITE%>
+// - Helper Low-Lvl Items for weapon swap -
+// Vigor Scepter
+ItemDisplay[WP13 NMAG  SK115>0 CLVL<55]:%NAME% %WHITE% <%GRAY%Vigor%WHITE%>
+// Lower Resist Wand
+ItemDisplay[WP12 NMAG SK91>0 CLVL<55]:%NAME% %WHITE% <%GRAY%Lower Res%WHITE%>
+// Teleport Orb/Staff
+ItemDisplay[(WP11 OR CL6) NMAG SK53>0 CLVL<55]:%NAME% %WHITE% <%GRAY%Teleport%WHITE%>
+
+// # Runeword Bases #
+// Marks possible good bases as a runeword target. 
+// Doom, Obedience - 5 Socket Ethereal Spear/Poleaxe (Mercenary Item)
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) ETH NMAG SOCK=5]:%NAME% %WHITE%<%TAN%doo|obe%WHITE%>
+// Infinity, Insight, Pride - 4 Socket Ethereal Spear/Poleaxe (Mercenary Item)
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7) ETH NMAG SOCK=4]:%NAME% %WHITE%<%TAN%inf|ins|pri%WHITE%>
+// Beast, Grief - 5 Socket Berserker Axe and Phase Blade
+ItemDisplay[(7wa OR 7cr) NMAG !ETH SOCK=5]:%NAME% %WHITE%<%TAN%bea|gri%WHITE%>
+// Spirit - 4 Socket Crystal Sword, Broad Sword
+ItemDisplay[(crs OR bsd) NMAG SOCK=4]:%NAME% %WHITE%<%TAN%spi%WHITE%>
+// Spirit - 4 Socket Monarch
+ItemDisplay[uit NMAG SOCK=4]:%NAME% %WHITE%<%TAN%spi%WHITE%>
+// Holy Thunder, Rift - 4 Socket War Sceptre, Divine Sceptre, Caduceus
+ItemDisplay[(wsp OR 9ws OR 7ws) NMAG SOCK=4]:%NAME% %WHITE%<%TAN%ht|rift%WHITE%>
+// Heart of the Oak - 4 Socket Flail
+ItemDisplay[fla NMAG SOCK=4]:%NAME% %WHITE%<%TAN%hoto%WHITE%>
+// Call to Arms - 5 Socket Flail, Crystal Sword
+ItemDisplay[(fla OR crs) NMAG SOCK=5]:%NAME% %WHITE%<%TAN%cta%WHITE%>
+// Memory - 4 Socket Staff
+// Might be controversial - you wouldn't put this on a garbage staff just to get the RW?
+ItemDisplay[WP11 NMAG SOCK=4]:%NAME% %WHITE%<%TAN%mem%WHITE%>
+// Faith - 4 Socket GMB or Great Bow
+ItemDisplay[(amc OR 6cb) NMAG SOCK=4]:%NAME% %WHITE%<%TAN%fai%WHITE%>
+// Passion - 4 Socket Berserker Axe and Phase Blade
+ItemDisplay[(7wa OR 7cr) NMAG SOCK=4]:%NAME% %WHITE%<%TAN%pas%WHITE%>
+// Oath - 4 Socket Ethereal Colossal Sword, Colossus Blade (Mercenary Item)
+ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=4]:%NAME% %WHITE%<%TAN%oat%WHITE%>
+// Death - 5 Socket Ethereal Colossal Sword, Colossus Blade (Mercenary Item)
+ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=5]:%NAME% %WHITE%<%TAN%dea%WHITE%>
+// Breath of the Dying - 6 Socket Ethereal Colossal Sword, Colossus Blade, Phase Blade
+ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) ETH NMAG SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>
+// Last Wish - 6 Socket Colossal Sword, Colossus Blade, Phase Blade (Mercenary Item/Normal Item)
+ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) NMAG SOCK=6]:%NAME% %WHITE%<%TAN%lw%WHITE%>
+// Lawbringer - 3 Socket Ethereal Legend Sword (Mercenary Item)
+ItemDisplay[72h ETH NMAG SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>
+
+// # Overall Good Bases #
+// T1 Weapons - Berserker Axe, Phase Blade, Crystal Sword, Grand Matron Bow, Great Bow, Colossus Sword, Colossus Blade 
+ItemDisplay[(7wa OR 7cr OR crs OR amc OR 6cb OR 7fb OR 7gd) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
+// Merc Weapons - Ethereal Poleaxes and Two-handers
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7 OR 7fb OR 7gd OR 72h) ETH NMAG]:%NAME% %WHITE%<%TAN%+%WHITE%>
+// T2 Weapons - BiS for specific builds - Thunder Maul, War Pike
+ItemDisplay[(7gm OR 7p7) NMAG]:%NAME% %WHITE%<%GRAY%*%WHITE%>
+// Helmet - Bone Visage, Diadem, Tiara
+ItemDisplay[(ci3 OR uh9 OR ci2) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
+// Body Armor - Dusk Shroud, Mage/Archon Plate
+ItemDisplay[(xtp OR utp OR uui) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
+// Merc Body Armor - Ethereal Sacred Armor
+ItemDisplay[uar ETH NMAG]:%NAME% %WHITE%<%TAN%+%WHITE%>
+// Shields - Troll Nest and Monarch
+ItemDisplay[(ush OR uit) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
+
+// ## Mod-Specific Items ##
+// !Performance Waste! 
+// As a personal preference, I like my colors to be consistent along the filter, and the currency color is TAN.
+// So, while this creates a rule that 99.9% of time will be skipped by the dropped items, I still want stuff to look good.
+// Includes: Keys, Organs, Token of Absolution, Essences, Orb of Corruption, Maps, Key of Chaos, Orb of Enchantment (whatever that is)
+ItemDisplay[pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR toa OR tes OR ceh OR bet OR fed OR cx5 OR ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz OR cx7 OR cx8]:%TAN%%NAME% %GRAY%<%RED%!%GRAY%>%TAN%
+
+// ## Magic Items ##
+
+// # Crafting Bases #
+// Let's not forget the iLvl here, since we need it
+// - Hit Power -
+// Gloves - Heavy Bracers, Vambraces
+ItemDisplay[(xmg OR umg) MAG]:%NAME%%BLUE% <%ORANGE%Ort%BLUE%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// - Blood -
+// Helmet - Casque, Armet
+ItemDisplay[(xlm OR ulm) MAG]:%NAME%%RED% <%ORANGE%Ral%RED%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Boots - Battle Boots, Mirrored Boots
+ItemDisplay[(xtb OR utb) MAG]:%NAME%%RED% <%ORANGE%Eth%RED%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Gloves - Sharkskin Gloves, Vampirebone Gloves
+ItemDisplay[(xvg OR uvg) MAG]:%NAME%%RED% <%ORANGE%Nef%RED%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Belt - Mesh Belt, Mythril Coil
+ItemDisplay[(zmb OR umc) MAG]:%NAME%%RED% <%ORANGE%Tal%RED%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// - Caster -
+// Boots - Demonhide Boots, Wyrmhide Boots
+ItemDisplay[(xlb OR ulb) MAG]:%NAME%%PURPLE% <%ORANGE%Thul%PURPLE%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Gloves - Demonhide Gloves, Bramble Mitts
+ItemDisplay[(xlg OR ulg) MAG]:%NAME%%PURPLE% <%ORANGE%Ort%PURPLE%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Belt - Sharkskin Belt, Vampirefang Belt
+ItemDisplay[(zvb OR uvc) MAG]:%NAME%%PURPLE% <%ORANGE%Ith%PURPLE%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// - Safety -
+// Belt - Demonhide Sash, Spiderweb Sash
+ItemDisplay[(zlb OR ulc) MAG]:%NAME%%DGREEN% <%ORANGE%Tal%DGREEN%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+// Shield - Monarch
+ItemDisplay[uit MAG]:%NAME%%DGREEN% <%ORANGE%Nef%DGREEN%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
+
+// # Show Identified Items #
+// So nothing we do after this applies to the stuff that was already ID'd
+// For some reason, this applies to Common items as well, so we have to filter them out
+// This rule is in a little bit of an awkward spot, since we need the ID'd crafting bases to still show the markers on them, but everything else shouldn't
+ItemDisplay[ID !NMAG]:%NAME%
+
+// # Jewelry #
+// Amulet with higher ilvl than 59 are important, since they spawn +3 to skilltab
+ItemDisplay[amu ILVL>59 MAG]:%NAME% %GRAY%<%RED%?%GRAY%>%BLUE%
+// Default rings and amulets
+ItemDisplay[(rin OR amu) MAG]:%NAME%
+
+// # Quivers #
+// Magic Arrows and Bolts
+ItemDisplay[(aq2 OR cq2) MAG DIFFICULTY=0]:%NAME%
+
+// # Charms #
+// Breakpoint levels - 91 for small and large charms
+ItemDisplay[(cm1 OR cm3) ILVL>90 MAG]:%NAME% %GRAY%<%RED%!%GRAY%>%BLUE%
+// 74 for medium
+ItemDisplay[cm2 ILVL>73 MAG]:%NAME% %GRAY%<%RED%!%GRAY%>%BLUE%
+// Default Charm display
+ItemDisplay[(cm1 OR cm2 OR cm3) MAG]:%NAME% %GRAY%<%RED%?%GRAY%>%BLUE%
+
+// # Magic Skill Items #
+// The only way in the game to get a +6 dream, or a +3 on a Gloves/Circlets.
+// Is it worth it to display this stuff? Probably, but not for everyone. We need to only display this starting from iLvl 60 as well.
+// Includes Matriarchal Bow, GMB, Maiden Javelin, Ceremonial Javelin, Matriarchal Javelin, Hand Scythe, Greater Claws, Greater Talons, Scissors Quhab,
+// Suwayyah, Wrist Sword, War Fist, Battle Cestus, Feral Claws, Runic Talons, Scissors Suwayyah, all Scepters, all Wands, all Orbs, all Necromancer Shields,
+// all Druid Helmets, all Barbarian Helmets, all Gloves, all Circlets
+// We start from MAG descriptor because I feel like the list is enormous, so it'd make sense to filter out Non-Magic stuff first
+ItemDisplay[MAG (amb OR amc OR am5 OR ama OR amf OR 9cs OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7xf OR 7cs OR 7lw OR 7tw OR 7qr OR WP13 OR WP12 OR CL6 OR CL4 OR CL2 OR CL1 OR EQ4 OR EQ7) ILVL>59]:%NAME% %GRAY%<%WHITE%?%GRAY%>%BLUE%
+// T2 Dream - you can get +6 on these from runewords, so there's probably no reason to show these. Just as a reference, they are here, commented out
+// Includes all Staves
+// ItemDisplay[WP11 MAG ILVL>59]:%NAME% %GRAY%<%WHITE%?%GRAY%>%BLUE%
+
+// ## Rare Items ##
+
+// # Armor Items #
+// Gloves, Boots, Belts
+ItemDisplay[(EQ4 OR EQ5 OR EQ6) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+
+// # Jewelry #
+// Amulets with higher ilvl than 89 are important, since they spawn +2 to classkills
+ItemDisplay[amu ILVL>89 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+// Rings with higher ilvl than 85 are important, since they spawn all of the available mods
+ItemDisplay[rin ILVL>85 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+// Default rings and amulets
+ItemDisplay[(rin OR amu) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+
+// # Quivers #
+// Arrows and Bolts
+ItemDisplay[(aq2 OR cq2) RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+
+// # Circlets #
+// Circlets with higher ilvl than 89 are important, since they spawn +2 to classkills
+ItemDisplay[EQ7 ILVL>89 RARE]:%NAME% %GRAY%<%RED%!!%GRAY%>%YELLOW%
+// Default Circlets
+ItemDisplay[EQ7 RARE]:%NAME% %GRAY%<%RED%!%GRAY%>%YELLOW%
+
+// # Class-specific #
+// The usual stuff - Druid Helms, Barbarian Helms, Necromancer Shields, Assassin Katars(only the ones that can have automods),
+// Sorceress Orbs, Wands, Scepters
+// None of them are strictly better than Magic items though, but all of them can be strictly better than a RW for a specific build
+ItemDisplay[(CL1 OR CL2 OR CL4 OR 9cs OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7xf OR 7cs OR 7lw OR 7tw OR 7qr OR CL6 OR WP12 OR WP13) RARE ILVL>39]:%NAME% %GRAY%<%WHITE%?%GRAY%>%YELLOW%
+
+// # Possible Dream Physical Rares #
+// Alright - this will never happen. But, what if? 
+// You can hit 450% ED + flat per level on a rare and get the best thing imaginable.
+// It's not worth the time to id every rare weapon for this, but hey, let's at least show good bases
+// Includes Berserker Axe, Phase Blade, Grand Matron Bow, Great Bow, Colossus Sword, Colossus Blade, Thunder Maul, War Pike, Matriarchal Pike
+// Marked with the lowest-possible marker, id them if you want to take a part in lottery.
+ItemDisplay[(7wa OR 7cr OR amc OR 6cb OR 7fb OR 7gd OR 7gm OR 7p7 OR ame) RARE ILVL>75]:%NAME% %GRAY%<%GRAY%?%GRAY%>%YELLOW%
+
+// ## Unique & Set Items ##
+
+// # Memes #
+// Includes 3 passenger seats
+ItemDisplay[9st UNI]:%GOLD%Honda Sedan
+
+// # Highlight rings & amulets #
+// Hype it up
+ItemDisplay[(rin OR amu) (UNI OR SET)]:%NAME% %GRAY%<%RED%!!%GRAY%>%GOLD%
+
+// # Highlight Elite Uniques&Sets #
+// On average, they are supposed to be good. I don't want to put any more logic into unique stuff detection, because it'd take a toll on performance
+ItemDisplay[(UNI OR SET) ELT]:%NAME% %GRAY%<%RED%!%GRAY%>%GOLD%
+
+// # Show all unique&set items #
+// Duh
+ItemDisplay[UNI OR SET]:%NAME%
+
+// ## Whitelist ##
+
+// # Levelling Rules #
+// Levelling rules are not dependant on the difficulty or the character level. Instead, they depend on the area level of a location the item is dropped in.
+// The item level of a dropped item is never lower than the area level, therefore we can use it to filter out stuff.
+// The basic idea here is simple: we want to filter low difficulty bases depending on the content the player is doing, 
+// instead of CLVL (can be anything) or difficulty (while starting out in Hell you might still need some Nightmare bases, for instance)
+// This alvl correlates with the alvl of Harem in Act 2 and last two levels of Hell Tower Cellar.
+// Quite arbitrary, I know, but it represents around 85% of all of this difficulty's items being available, which means that, realistically, there's no reason to see items from the previous difficulty.
+// Also, these rules don't conflict with any other rules that come before them - for example, you'll still see 5os Crystal Swords, even in high alvl areas.
+ItemDisplay[NORM (ARMOR OR WEAPON) ILVL<47]:%NAME%
+ItemDisplay[EXC (ARMOR OR WEAPON) ILVL<78]:%NAME%
+ItemDisplay[ELT (ARMOR OR WEAPON) ILVL<85]:%NAME%
+// The whitelist's backbone - hiding everything, including non-equipment equipment items - charms and arrows.
+// Scary stuff - anything not mentioned in all of the previous rules will be hidden from sight.
+ItemDisplay[ARMOR OR WEAPON OR rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR aq2 OR cq2]:
