@@ -88,10 +88,10 @@ ItemDisplay[GEMLEVEL>0 GEMLEVEL<4]:
 ItemDisplay[gzv OR glb OR glg OR glr OR skl]:%ORANGE%Gem+%WHITE%
 // Remaining Gems
 // Literally no use for them in the endgame - so we should stop showing them there
-ItemDisplay[GEMLEVEL>0 GEMLEVEL=4 ILVL<85]:%ORANGE%Gem%WHITE%
-ItemDisplay[GEMLEVEL>0 GEMLEVEL=4]:
+ItemDisplay[GEMLEVEL=4 CLVL<80]:%ORANGE%Gem%WHITE%
+ItemDisplay[GEMLEVEL=4]:
 // Perfect Gems - no need for special distinction, in my opinion.
-ItemDisplay[GEMLEVEL>0 GEMLEVEL=5]:%ORANGE%%NAME%
+ItemDisplay[GEMLEVEL=5]:%ORANGE%%NAME%
 // # Runes #
 // Crafting Runes 4-10
 ItemDisplay[RUNE>3 RUNE<10]:%ORANGE%%NAME%%GRAY% <%ORANGE%c%GRAY%> %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
@@ -193,9 +193,32 @@ ItemDisplay[ETH (EQ4 OR EQ5 OR EQ6) (MAG OR RARE)]:
 // All in all, the choice is between a possible %CONTINUE% performance hotspot and multiple additional convoluted lines that will 100% affect performance.
 // I'll take my chances.
 //
-// Of course, it would've been too easy if that was it. Unfortunately, there are some other issues with this. If you pre marker it like that, if the item is filtered out
+// Of course, it would've been too easy if that was it. Unfortunately, there is an issue with this. If you pre marker it like that, if the item is filtered out
 // at some point after it, it will be shown as a " " (blank space) on the ground. That's really annoying and makes no sense.
-// Which means that we have to fix it, and the fix will be ugly.
+// There are ways to curcumvent that, but they are all awful, and honestly, this makes no sense. This is a straight-up bug in the filtering mechanism that has nothing to do with
+// the filter itself. Until they fix that, I'm keeping everything as it is, I don't care. Sure, it shows black spaces sometimes, but this way it works consistently and across every
+// item, supporting any combination of socket numbers, etheriality and superiority AND it is actually readable as a filter.
+//
+// Bottom line, if you're using %CONTINUE% you're fucked either way - the ONLY way you can use it and not have side effects is to:
+// 1. Explicitly filter EVERYTHING you'll not need first
+// 2. Use %CONTINUE%, probably in pre-marker way, really doesn't matter
+// 3. Show everything
+// In our cap example, it'd look like this:
+//
+// ItemDisplay[!cap]:
+// ItemDisplay[SOCK>0]:%NAME% (%SOCKETS%)
+// ItemDisplay[]:%NAME%
+//
+// You can see how the first line is the actual filter, and you can imagine how completely unreadable an actual implementation of such a filter would be - you'd have to
+// reverse EVERY rule. For instance, to show a 4os Crystal Sword, you'd have to: 1) hide everything that's not a Crystal Sword 2) hide non-4os Crystal Swords. Add multiple bases
+// to this, and the rules will become so convoluted and redundant, that you'd have an absolute madness of a lootfilter.
+
+// # Fix for the aforementioned "empty name" issue #
+// Just filter out the most common items - it will not fix the issue completely, but reduce the size of it
+// This is an absolute madness
+ItemDisplay[NORM NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !crs AND !bsd AND !fla) !RW ILVL>46]:
+ItemDisplay[EXC NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !ci2 AND !xtp) !RW ILVL>77]:
+ItemDisplay[ELT NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !7wa AND !7cr AND !6cb AND !7fb AND !7gd AND !7wc AND !7pa AND !7s8 AND !7vo AND !7h7 AND !7tr AND !7br AND !7st AND !7p7 AND !72h AND !7gm AND !ci3 AND !uh9 AND !utp AND !uui AND !uar AND !ush AND !uit) !RW ILVL>84]:
 
 // # Sockets #
 ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
@@ -215,7 +238,7 @@ ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 //
 // Number 2 - primer on that over here: http://classic.battle.net/diablo2exp/items/crafteditems.shtml
 // My question is - How important is that? Probably pretty important, so let's add Magic crafting bases to the ilvl list.
-// Rings and amulets will be included here, while the other crafting bases - in the crafting section. Next.
+// Their iLvl will be set up their own personal sections.
 //
 // Number 3 - let's take a look at the affixes: http://classic.battle.net/diablo2exp/items/magic/pre.shtml
 // That's just the prefixes, suffixes are here: http://classic.battle.net/diablo2exp/items/magic/suf.shtml
@@ -235,7 +258,7 @@ ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 // and since, realistically, it does not carry that much information, i'd rather do away with it if I can.
 //
 // Therefore, the ilvl rule is as follows:
-ItemDisplay[(ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0) OR ((rin OR amu) MAG)]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%GOLD%%CONTINUE%
+ItemDisplay[ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%GRAY%%CONTINUE%
 
 // ## Common Items ##
 
@@ -251,7 +274,7 @@ ItemDisplay[(amb OR amc OR amd OR ame) NMAG (TABSK0>2 OR TABSK2>2)]:%NAME% %WHIT
 // - Paladin Items -
 // For shields, it makes sense to only show the best ones in the endgame areas
 // Shield Resist 
-ItemDisplay[ILVL<78 CL3 NMAG RES>34 ]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>
+ItemDisplay[ILVL<78 CL3 NMAG RES>34]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>
 ItemDisplay[(pab OR pac) NMAG RES>34]:%NAME% %WHITE%<%ORANGE%Res%WHITE%>
 // Shield Damage
 ItemDisplay[ILVL<78 CL3 NMAG ITEMSTAT17>50]:%NAME% %WHITE%<%ORANGE%Dmg%WHITE%>
@@ -290,6 +313,8 @@ ItemDisplay[(CL4 OR WP12) NMAG SK92>2]:%NAME% %WHITE%<%ORANGE%PN%WHITE%>
 ItemDisplay[(CL4 OR WP12) NMAG SK69>2]:%NAME% %WHITE%<%ORANGE%SM%WHITE%>
 // - Sorceress Items -
 // Skill Orbs&Staves
+// Actually, there's 0 point in using a Common orb, since you can't even RW it with anything
+// Still, leaving this here, since it can be useful in early game 
 ItemDisplay[(CL6 OR WP11) NMAG SK47>2]:%NAME% %WHITE%<%ORANGE%Fireball%WHITE%>
 ItemDisplay[(CL6 OR WP11) NMAG SK56>2]:%NAME% %WHITE%<%ORANGE%Meteor%WHITE%>
 ItemDisplay[(CL6 OR WP11) NMAG SK62>2]:%NAME% %WHITE%<%ORANGE%Hydra%WHITE%>
@@ -414,9 +439,10 @@ ItemDisplay[ID !NMAG]:%NAME%
 
 // # Jewelry #
 // Amulet with higher ilvl than 59 are important, since they spawn +3 to skilltab
-ItemDisplay[amu ILVL>59 MAG]:%NAME% %GRAY%<%RED%?%GRAY%>%BLUE%
+// Don't forget the ilvl here, for crafting purposes
+ItemDisplay[amu ILVL>59 MAG]:%NAME% %GRAY%<%RED%?%GRAY%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
 // Default rings and amulets
-ItemDisplay[(rin OR amu) MAG]:%NAME%
+ItemDisplay[(rin OR amu) MAG]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
 
 // # Quivers #
 // Magic Arrows and Bolts
