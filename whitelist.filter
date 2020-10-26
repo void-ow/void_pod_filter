@@ -15,21 +15,21 @@ ItemDisplay[GOLD<10000]:
 // # Hide scrolls #
 // The second most common thing
 // Town Portal Scroll - show until act 3 Normal
-ItemDisplay[tsc CLVL<21]:%TAN%Scroll of Town Portal%WHITE%
+ItemDisplay[tsc CLVL<16]:%TAN%Scroll of Town Portal%WHITE%
 ItemDisplay[tsc]:
 // Identify Scroll - show until act 2 Normal
-ItemDisplay[isc CLVL<14]:%TAN%Scroll of Identification%WHITE%
+ItemDisplay[isc CLVL<11]:%TAN%Scroll of Identification%WHITE%
 ItemDisplay[isc]:
 
 // # Hide Healing/Mana Potions #
 // Lesser Healing Potion - show until Act 2 Normal
-ItemDisplay[hp1 CLVL<14]:%RED%less%WHITE%
+ItemDisplay[hp1 CLVL<11]:%RED%less%WHITE%
 ItemDisplay[hp1]: 
 // Light Healing Potion - show throughout all Normal
-ItemDisplay[hp2 DIFFICULTY=0]:%RED%light%WHITE%
+ItemDisplay[hp2 DIFFICULTY=0]:%RED%tiny%WHITE%
 ItemDisplay[hp2]:
 // Healing Potion - show throughout all Normal
-ItemDisplay[hp3 DIFFICULTY=0]:%RED%norm%WHITE%
+ItemDisplay[hp3 DIFFICULTY=0]:%RED%small%WHITE%
 ItemDisplay[hp3]:
 // Greater Healing Potion - show throughout all Nightmare
 ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
@@ -38,10 +38,10 @@ ItemDisplay[hp4]:
 ItemDisplay[mp1 CLVL<21]:%BLUE%less%WHITE%
 ItemDisplay[mp1]:
 // Light Mana Potion - show throughout all Normal
-ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%light%WHITE%
+ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%tiny%WHITE%
 ItemDisplay[mp2]:
 // Mana Potion - show throughout all Normal
-ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%norm%WHITE%
+ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%small%WHITE%
 ItemDisplay[mp3]:
 // Greater Mana Potion - show throughout all Nightmare
 ItemDisplay[mp4 DIFFICULTY<2]:%BLUE%mp%WHITE%
@@ -81,7 +81,9 @@ ItemDisplay[gpm OR opm OR opl OR ops OR gps OR gpl]:
 // # Gems #
 // Non-flawless gems - Not needed for rune upgrades anymore, but still, might be good to plop them while levelling
 // Flawless gems start dropping from Nightmare, at that point we should hide the inferior ones.
-ItemDisplay[GEMLEVEL>0 GEMLEVEL<4 DIFFICULTY<1]:%ORANGE%%NAME%
+ItemDisplay[GEMLEVEL=1 CLVL<11]:%ORANGE%Chipped
+ItemDisplay[GEMLEVEL=2 CLVL<16]:%ORANGE%Flawed
+ItemDisplay[GEMLEVEL=3 DIFFICULTY<1]:%ORANGE%%NAME%
 ItemDisplay[GEMLEVEL>0 GEMLEVEL<4]:
 // Flawless Gems - Gems are not created equal, some are needed in crafting and some are not. Additionally, some of them are skulls
 // Crafting Gems - Ruby, Amethyst, Sapphire, Emerald
@@ -238,7 +240,7 @@ ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 //
 // Number 2 - primer on that over here: http://classic.battle.net/diablo2exp/items/crafteditems.shtml
 // My question is - How important is that? Probably pretty important, so let's add Magic crafting bases to the ilvl list.
-// Their iLvl will be set up their own personal sections.
+// Their iLvl will be set up in their own personal sections.
 //
 // Number 3 - let's take a look at the affixes: http://classic.battle.net/diablo2exp/items/magic/pre.shtml
 // That's just the prefixes, suffixes are here: http://classic.battle.net/diablo2exp/items/magic/suf.shtml
@@ -258,7 +260,7 @@ ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
 // and since, realistically, it does not carry that much information, i'd rather do away with it if I can.
 //
 // Therefore, the ilvl rule is as follows:
-ItemDisplay[ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0]:%NAME% %GRAY%[%WHITE%%ILVL%%GRAY%]%GRAY%%CONTINUE%
+ItemDisplay[ILVL<41 (EQ1 OR EQ2 OR EQ3 OR WEAPON) NMAG SOCK=0]:%NAME% %GRAY%[%ILVL%]%CONTINUE%
 
 // ## Common Items ##
 
@@ -376,16 +378,20 @@ ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=5]:%NAME% %WHITE%<%TAN%dea%WHITE%>
 ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) ETH NMAG SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>
 // Last Wish - 6 Socket Colossal Sword, Colossus Blade, Phase Blade (Mercenary Item/Normal Item)
 ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) NMAG SOCK=6]:%NAME% %WHITE%<%TAN%lw%WHITE%>
-// Lawbringer - 3 Socket Ethereal Legend Sword (Mercenary Item)
-ItemDisplay[72h ETH NMAG SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>
+// Lawbringer - 3 Socket preferable Ethereal Legend Sword (Mercenary Item)
+ItemDisplay[72h NMAG SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>
+// Silence - 6 Socket Berserker Axe
+ItemDisplay[7wa NMAG SOCK=6]:%NAME% %WHITE%<%TAN%sil%WHITE%>
+// Chaos - 3 Socket Suwayyah
+ItemDisplay[7ar NMAG SOCK=3]:%NAME% %WHITE%<%TAN%cha%WHITE%>
 
 // # Overall Good Bases #
 // T1 Weapons - Berserker Axe, Phase Blade, Crystal Sword, Grand Matron Bow, Great Bow, Colossus Sword, Colossus Blade 
 ItemDisplay[(7wa OR 7cr OR crs OR amc OR 6cb OR 7fb OR 7gd) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
 // Merc Weapons - Ethereal Poleaxes and Two-handers
 ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7 OR 7fb OR 7gd OR 72h) ETH NMAG]:%NAME% %WHITE%<%TAN%+%WHITE%>
-// T2 Weapons - BiS for specific builds - Thunder Maul, War Pike
-ItemDisplay[(7gm OR 7p7) NMAG]:%NAME% %WHITE%<%GRAY%*%WHITE%>
+// T2 Weapons - Used for specific builds - Thunder Maul, War Pike, Suwayyah
+ItemDisplay[(7gm OR 7p7 OR 7ar) NMAG]:%NAME% %WHITE%<%GRAY%*%WHITE%>
 // Helmet - Bone Visage, Diadem, Tiara
 ItemDisplay[(ci3 OR uh9 OR ci2) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
 // Body Armor - Dusk Shroud, Mage/Archon Plate
@@ -438,7 +444,7 @@ ItemDisplay[uit MAG]:%NAME%%DGREEN% <%ORANGE%Nef%DGREEN%> %GRAY%[%WHITE%%ILVL%%G
 ItemDisplay[ID !NMAG]:%NAME%
 
 // # Jewelry #
-// Amulet with higher ilvl than 59 are important, since they spawn +3 to skilltab
+// Amulets with higher ilvl than 59 are important, since they spawn +3 to skilltab
 // Don't forget the ilvl here, for crafting purposes
 ItemDisplay[amu ILVL>59 MAG]:%NAME% %GRAY%<%RED%?%GRAY%> %GRAY%[%WHITE%%ILVL%%GRAY%]%BLUE%
 // Default rings and amulets
@@ -503,7 +509,7 @@ ItemDisplay[(CL1 OR CL2 OR CL4 OR 9cs OR 9lw OR 9tw OR 9qr OR 7ar OR 7wb OR 7xf 
 // You can hit 450% ED + flat per level on a rare and get the best thing imaginable.
 // It's not worth the time to id every rare weapon for this, but hey, let's at least show good bases
 // Includes Berserker Axe, Phase Blade, Grand Matron Bow, Great Bow, Colossus Sword, Colossus Blade, Thunder Maul, War Pike, Matriarchal Pike
-// Marked with the lowest-possible marker, id them if you want to take a part in lottery.
+// Marked with the lowest-possible marker, id them if you want to take a part in a lottery.
 ItemDisplay[(7wa OR 7cr OR amc OR 6cb OR 7fb OR 7gd OR 7gm OR 7p7 OR ame) RARE ILVL>75]:%NAME% %GRAY%<%GRAY%?%GRAY%>%YELLOW%
 
 // ## Unique & Set Items ##
@@ -528,7 +534,7 @@ ItemDisplay[UNI OR SET]:%NAME%
 
 // # Item Rarity Rules #
 // Starting from Nightmare, don't show irrelevant magic items.
-ItemDisplay[(ARMOR OR WEAPON) MAG DIFFICULTY=0]:%NAME%
+ItemDisplay[(ARMOR OR WEAPON) MAG DIFFICULTY>0]:
 // # Levelling Rules #
 // Levelling rules are not dependant on the difficulty or the character level. Instead, they depend on the area level of a location the item is dropped in.
 // The item level of a dropped item is never lower than the area level, therefore we can use it to filter out stuff.
@@ -537,9 +543,9 @@ ItemDisplay[(ARMOR OR WEAPON) MAG DIFFICULTY=0]:%NAME%
 // This alvl correlates with the alvl of Harem in Act 2 and last two levels of Hell Tower Cellar.
 // Quite arbitrary, I know, but it represents around 85% of all of this difficulty's items being available, which means that, realistically, there's no reason to see items from the previous difficulty.
 // Also, these rules don't conflict with any other rules that come before them - for example, you'll still see 5os Crystal Swords, even in high alvl areas.
-ItemDisplay[NORM !MAG (ARMOR OR WEAPON) ILVL<47]:%NAME%
-ItemDisplay[EXC !MAG (ARMOR OR WEAPON) ILVL<78]:%NAME%
-ItemDisplay[ELT !MAG (ARMOR OR WEAPON) ILVL<85]:%NAME%
+ItemDisplay[NORM (ARMOR OR WEAPON) ILVL<47]:%NAME%
+ItemDisplay[EXC (ARMOR OR WEAPON) ILVL<78]:%NAME%
+ItemDisplay[ELT (ARMOR OR WEAPON) ILVL<85]:%NAME%
 // The whitelist's backbone - hiding everything, including non-equipment equipment items - charms and arrows.
 // Scary stuff - anything not mentioned in all of the previous rules will be hidden from sight.
 ItemDisplay[ARMOR OR WEAPON OR rin OR amu OR jew OR cm1 OR cm2 OR cm3 OR aq2 OR cq2]:
