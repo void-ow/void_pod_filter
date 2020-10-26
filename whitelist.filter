@@ -218,7 +218,7 @@ ItemDisplay[ETH (EQ4 OR EQ5 OR EQ6) (MAG OR RARE)]:
 // # Fix for the aforementioned "empty name" issue #
 // Just filter out the most common items - it will not fix the issue completely, but reduce the size of it
 // This is an absolute madness
-ItemDisplay[NORM NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !crs AND !bsd AND !fla) !RW ILVL>46]:
+ItemDisplay[NORM NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !crs AND !bsd AND !fla AND !leg) !RW ILVL>46]:
 ItemDisplay[EXC NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !ci2 AND !xtp) !RW ILVL>77]:
 ItemDisplay[ELT NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !7wa AND !7cr AND !6cb AND !7fb AND !7gd AND !7wc AND !7pa AND !7s8 AND !7vo AND !7h7 AND !7tr AND !7br AND !7st AND !7p7 AND !72h AND !7gm AND !ci3 AND !uh9 AND !utp AND !uui AND !uar AND !ush AND !uit) !RW ILVL>84]:
 
