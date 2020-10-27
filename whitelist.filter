@@ -23,25 +23,25 @@ ItemDisplay[isc]:
 
 // # Hide Healing/Mana Potions #
 // Lesser Healing Potion - show until Act 2 Normal
-ItemDisplay[hp1 CLVL<11]:%RED%hp%WHITE% 1
+ItemDisplay[hp1 CLVL<11]:%RED%hp %GRAY%1%WHITE%
 ItemDisplay[hp1]: 
 // Light Healing Potion - show throughout all Normal
-ItemDisplay[hp2 DIFFICULTY=0]:%RED%hp%WHITE% 2
+ItemDisplay[hp2 DIFFICULTY=0]:%RED%hp %WHITE%2
 ItemDisplay[hp2]:
 // Healing Potion - show throughout all Normal
-ItemDisplay[hp3 DIFFICULTY=0]:%RED%hp%WHITE% 3
+ItemDisplay[hp3 DIFFICULTY=0]:%RED%hp %BLUE%3%WHITE%
 ItemDisplay[hp3]:
 // Greater Healing Potion - show throughout all Nightmare
 ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
 ItemDisplay[hp4]:
 // Lesser Mana Potion - show until act 3 Normal
-ItemDisplay[mp1 CLVL<21]:%BLUE%mp%WHITE% 1
+ItemDisplay[mp1 CLVL<16]:%BLUE%mp %GRAY%1%WHITE%
 ItemDisplay[mp1]:
 // Light Mana Potion - show throughout all Normal
-ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%mp%WHITE% 2
+ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%mp %WHITE%2
 ItemDisplay[mp2]:
 // Mana Potion - show throughout all Normal
-ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%mp%WHITE% 3
+ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%mp %BLUE%3%WHITE%
 ItemDisplay[mp3]:
 // Greater Mana Potion - show throughout all Nightmare
 ItemDisplay[mp4 DIFFICULTY<2]:%BLUE%mp%WHITE%
@@ -51,14 +51,9 @@ ItemDisplay[rvs DIFFICULTY<2]:%PURPLE%rp%WHITE%
 ItemDisplay[rvs]:
 
 // # Hide utility potions & keys #
-// Key - while it is funny to get a key in a locked chest, it's pointless to show them
-ItemDisplay[key]:
-// Stamina potion
-ItemDisplay[vps]:
-// Antidote potion
-ItemDisplay[yps]:
-// Thawing potion
-ItemDisplay[wms]:
+// Key (while it is funny to get a key in a locked chest, it's pointless to show them), Stamina Potions, Antidote Potions, Thawing Potions
+ItemDisplay[key OR vps OR yps OR wms]:
+
 
 // # Rename usable consumables # - Color coded as a potion color
 // Super Healing Potion
@@ -69,12 +64,8 @@ ItemDisplay[mp5]:%BLUE%MP%WHITE%
 ItemDisplay[rvl]:%PURPLE%RP%WHITE%
 
 // # Hide Common Ranged items #
-// Rusted Arrows
-ItemDisplay[aqv]:
-// Rusted Bolts:
-ItemDisplay[cqv]:
-// Throwing Potions
-ItemDisplay[gpm OR opm OR opl OR ops OR gps OR gpl]:
+// Rusted Arrows, Bolts, Throwing Potions
+ItemDisplay[aqv OR cqv OR gpm OR opm OR opl OR ops OR gps OR gpl]:
 
 // ## Socketables ##
 
@@ -96,12 +87,9 @@ ItemDisplay[GEMLEVEL=4]:
 ItemDisplay[GEMLEVEL=5]:%ORANGE%%NAME%
 // # Runes #
 // Crafting Runes 4-10
-ItemDisplay[RUNE>3 RUNE<10]:%ORANGE%%NAME%%GRAY% <%ORANGE%c%GRAY%> %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
+ItemDisplay[RUNE>3 RUNE<11]:%ORANGE%%NAME%%GRAY% <%ORANGE%c%GRAY%> %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
 // Default Runes
 ItemDisplay[RUNE>0]:%ORANGE%%NAME% %WHITE%[%ORANGE%%RUNENUM%%WHITE%]%ORANGE%
-// # Jewels #
-ItemDisplay[jew MAG !ID]:%ORANGE%Jwl%WHITE%
-ItemDisplay[jew RARE !ID]:%ORANGE%Jewel%WHITE%
 
 // ### Item Filter ###
 // Here, the difference between a whitelist and a blacklist should be minimal, since there is no way of telling what items should
@@ -223,12 +211,12 @@ ItemDisplay[NORM NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL
 ItemDisplay[EXC NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !ci2 AND !xtp AND !leg) !RW ILVL>77]:
 ItemDisplay[ELT NMAG (ARMOR OR WEAPON) (!CL1 AND !CL2 AND !CL3 AND !CL4 AND !CL5 AND !CL6 AND !CL7 AND !WP11 AND !WP12 AND !WP13 AND !7wa AND !7cr AND !6cb AND !7fb AND !7gd AND !7wc AND !7pa AND !7s8 AND !7vo AND !7h7 AND !7tr AND !7br AND !7st AND !7p7 AND !72h AND !7gm AND !ci3 AND !uh9 AND !utp AND !uui AND !uar AND !ush AND !uit AND !leg) !RW ILVL>84]:
 
-// # Sockets #
-ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
-// # Ethereality #
-ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
 // # Superiority #
 ItemDisplay[SUP]:%NAME% %GRAY%{%YELLOW%Sup%GRAY%}%WHITE%%CONTINUE%
+// # Ethereality #
+ItemDisplay[ETH]:%NAME% %GRAY%{%BLUE%Eth%GRAY%}%WHITE%%CONTINUE%
+// # Sockets #
+ItemDisplay[SOCK>0]:%NAME% %GRAY%(%WHITE%%SOCKETS%%GRAY%)%CONTINUE%
 // # Item Level #
 // Alright, this can get really ugly performance-wise, since every item in the game got an item level, so extra care should be taken here.
 // There are actually 3 distinct situations where you care about an item level.
@@ -316,8 +304,6 @@ ItemDisplay[(CL4 OR WP12) NMAG SK92>2]:%NAME% %WHITE%<%ORANGE%PN%WHITE%>
 ItemDisplay[(CL4 OR WP12) NMAG SK69>2]:%NAME% %WHITE%<%ORANGE%SM%WHITE%>
 // - Sorceress Items -
 // Skill Orbs&Staves
-// Actually, there's 0 point in using a Common orb, since you can't even RW it with anything
-// Still, leaving this here, since it can be useful in early game 
 ItemDisplay[(CL6 OR WP11) NMAG SK47>2]:%NAME% %WHITE%<%ORANGE%Fireball%WHITE%>
 ItemDisplay[(CL6 OR WP11) NMAG SK56>2]:%NAME% %WHITE%<%ORANGE%Meteor%WHITE%>
 ItemDisplay[(CL6 OR WP11) NMAG SK62>2]:%NAME% %WHITE%<%ORANGE%Hydra%WHITE%>
@@ -375,8 +361,8 @@ ItemDisplay[(7wa OR 7cr) NMAG SOCK=4]:%NAME% %WHITE%<%TAN%pas%WHITE%>
 ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=4]:%NAME% %WHITE%<%TAN%oat%WHITE%>
 // Death - 5 Socket Ethereal Colossal Sword, Colossus Blade (Mercenary Item)
 ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=5]:%NAME% %WHITE%<%TAN%dea%WHITE%>
-// Breath of the Dying - 6 Socket Ethereal Colossal Sword, Colossus Blade, Phase Blade
-ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) ETH NMAG SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>
+// Breath of the Dying - 6 Socket Ethereal Colossal Sword, Colossus Blade, Berserker Axe, Phase Blade, War Pike
+ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr OR 7p7) ETH NMAG SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>
 // Last Wish - 6 Socket Colossal Sword, Colossus Blade, Phase Blade (Mercenary Item/Normal Item)
 ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) NMAG SOCK=6]:%NAME% %WHITE%<%TAN%lw%WHITE%>
 // Lawbringer - 3 Socket preferable Ethereal Legend Sword (Mercenary Item), Phase Blade or Cryptic Sword
@@ -388,9 +374,9 @@ ItemDisplay[7ar NMAG SOCK=3]:%NAME% %WHITE%<%TAN%cha%WHITE%>
 
 // # Overall Good Bases #
 // T1 Weapons - Berserker Axe, Phase Blade, Crystal Sword, Grand Matron Bow, Great Bow, Colossus Sword, Colossus Blade 
-ItemDisplay[(7wa OR 7cr OR crs OR amc OR 6cb OR 7fb OR 7gd) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
+ItemDisplay[(7wa OR 7cr OR crs OR amc OR 6cb OR 7fb OR 7gd) NMAG SOCK=0]:%NAME% %WHITE%<%TAN%*%WHITE%>
 // Merc Weapons - Ethereal Poleaxes and Two-handers
-ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7 OR 7fb OR 7gd OR 72h) ETH NMAG]:%NAME% %WHITE%<%TAN%+%WHITE%>
+ItemDisplay[(7wc OR 7pa OR 7s8 OR 7vo OR 7h7 OR 7tr OR 7br OR 7st OR 7p7 OR 7fb OR 7gd OR 72h) ETH NMAG SOCK=0]:%NAME% %WHITE%<%TAN%+%WHITE%>
 // T2 Weapons - Used for specific builds - Thunder Maul, War Pike, Suwayyah
 ItemDisplay[(7gm OR 7p7 OR 7ar) NMAG]:%NAME% %WHITE%<%GRAY%*%WHITE%>
 // Helmet - Bone Visage, Diadem, Tiara
@@ -404,10 +390,10 @@ ItemDisplay[(ush OR uit) NMAG]:%NAME% %WHITE%<%TAN%*%WHITE%>
 
 // ## Mod-Specific Items ##
 // !Performance Waste! 
-// As a personal preference, I like my colors to be consistent along the filter, and the currency color is TAN.
+// As a personal preference, I like my colors to be consistent along the filter, and the currency color is PURPLE.
 // So, while this creates a rule that 99.9% of time will be skipped by the dropped items, I still want stuff to look good.
 // Includes: Keys, Organs, Token of Absolution, Essences, Orb of Corruption, Maps, Key of Chaos, Orb of Enchantment (whatever that is)
-ItemDisplay[pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR toa OR tes OR ceh OR bet OR fed OR cx5 OR ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz OR cx7 OR cx8]:%TAN%%NAME% %GRAY%<%RED%*%GRAY%>%TAN%
+ItemDisplay[pk1 OR pk2 OR pk3 OR dhn OR bey OR mbr OR toa OR tes OR ceh OR bet OR fed OR cx5 OR ma1 OR ma2 OR ma3 OR ma4 OR ma5 OR ma6 OR ma7 OR ma8 OR ma9 OR ma10 OR maz OR cx7 OR cx8]:%PURPLE%%NAME% %GRAY%<%RED%**%GRAY%>%TAN%
 
 // ## Magic Items ##
 
@@ -463,6 +449,9 @@ ItemDisplay[cm2 ILVL>73 MAG]:%NAME% %GRAY%<%RED%*%GRAY%>%BLUE%
 // Default Charm display
 ItemDisplay[(cm1 OR cm2 OR cm3) MAG]:%NAME% %GRAY%<%RED%?%GRAY%>%BLUE%
 
+// # Jewels #
+ItemDisplay[jew MAG]:%NAME% %GRAY%<%WHITE%?%GRAY%>%BLUE%
+
 // # Magic Skill Items #
 // The only way in the game to get a +6 dream, or a +3 on a Gloves/Circlets.
 // Is it worth it to display this stuff? Probably, but not for everyone. We need to only display this starting from iLvl 60 as well.
@@ -488,6 +477,9 @@ ItemDisplay[amu ILVL>89 RARE]:%NAME% %GRAY%<%RED%**%GRAY%>%YELLOW%
 ItemDisplay[rin ILVL>85 RARE]:%NAME% %GRAY%<%RED%**%GRAY%>%YELLOW%
 // Default rings and amulets
 ItemDisplay[(rin OR amu) RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
+
+// # Jewels #
+ItemDisplay[jew RARE]:%NAME% %GRAY%<%RED%*%GRAY%>%YELLOW%
 
 // # Quivers #
 // Arrows and Bolts
