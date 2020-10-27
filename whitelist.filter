@@ -379,8 +379,8 @@ ItemDisplay[(7fb OR 7gd) ETH NMAG SOCK=5]:%NAME% %WHITE%<%TAN%dea%WHITE%>
 ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) ETH NMAG SOCK=6]:%NAME% %WHITE%<%TAN%botd%WHITE%>
 // Last Wish - 6 Socket Colossal Sword, Colossus Blade, Phase Blade (Mercenary Item/Normal Item)
 ItemDisplay[(7fb OR 7gd OR 7wa OR 7cr) NMAG SOCK=6]:%NAME% %WHITE%<%TAN%lw%WHITE%>
-// Lawbringer - 3 Socket preferable Ethereal Legend Sword (Mercenary Item)
-ItemDisplay[72h NMAG SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>
+// Lawbringer - 3 Socket preferable Ethereal Legend Sword (Mercenary Item), Phase Blade or Cryptic Sword
+ItemDisplay[(72h OR 7cr OR 7ls) NMAG SOCK=3]:%NAME% %WHITE%<%TAN%law%WHITE%>
 // Silence - 6 Socket Berserker Axe
 ItemDisplay[7wa NMAG SOCK=6]:%NAME% %WHITE%<%TAN%sil%WHITE%>
 // Chaos - 3 Socket Suwayyah
