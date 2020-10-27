@@ -23,25 +23,25 @@ ItemDisplay[isc]:
 
 // # Hide Healing/Mana Potions #
 // Lesser Healing Potion - show until Act 2 Normal
-ItemDisplay[hp1 CLVL<11]:%RED%less%WHITE%
+ItemDisplay[hp1 CLVL<11]:%RED%hp%WHITE% 1
 ItemDisplay[hp1]: 
 // Light Healing Potion - show throughout all Normal
-ItemDisplay[hp2 DIFFICULTY=0]:%RED%tiny%WHITE%
+ItemDisplay[hp2 DIFFICULTY=0]:%RED%hp%WHITE% 2
 ItemDisplay[hp2]:
 // Healing Potion - show throughout all Normal
-ItemDisplay[hp3 DIFFICULTY=0]:%RED%small%WHITE%
+ItemDisplay[hp3 DIFFICULTY=0]:%RED%hp%WHITE% 3
 ItemDisplay[hp3]:
 // Greater Healing Potion - show throughout all Nightmare
 ItemDisplay[hp4 DIFFICULTY<2]:%RED%hp%WHITE%
 ItemDisplay[hp4]:
 // Lesser Mana Potion - show until act 3 Normal
-ItemDisplay[mp1 CLVL<21]:%BLUE%less%WHITE%
+ItemDisplay[mp1 CLVL<21]:%BLUE%mp%WHITE% 1
 ItemDisplay[mp1]:
 // Light Mana Potion - show throughout all Normal
-ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%tiny%WHITE%
+ItemDisplay[mp2 DIFFICULTY=0]:%BLUE%mp%WHITE% 2
 ItemDisplay[mp2]:
 // Mana Potion - show throughout all Normal
-ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%small%WHITE%
+ItemDisplay[mp3 DIFFICULTY=0]:%BLUE%mp%WHITE% 3
 ItemDisplay[mp3]:
 // Greater Mana Potion - show throughout all Nightmare
 ItemDisplay[mp4 DIFFICULTY<2]:%BLUE%mp%WHITE%
